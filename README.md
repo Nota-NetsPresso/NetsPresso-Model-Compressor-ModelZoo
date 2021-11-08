@@ -10,7 +10,7 @@
 ## Installation
 
 ```shell
-$ git clone https://github.com/nota-github/nptk-model-zoo.git
+$ git clone https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo.git
 $ pip install -r requirements.txt
 ```
 
