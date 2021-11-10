@@ -23,20 +23,20 @@
 ## Detail Workflow of the NetsPresso Compression Toolkit
 
 ### Preparing the pre-trained model
-
+  #### Download current repository
   ```shell
   $ git clone https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo.git
   $ pip install -r requirements.txt
   ```
 
-  #### For the Web User (Public model only)
-    <a target="_blank" href="/imgs/web_user_1.png">
-      <img src="/imgs/web_user_1.png" alt="web_user">
-    </a>
+  #### For the Web User
+  <a target="_blank" href="/imgs/web_user_1.png">
+    <img src="/imgs/web_user_1.png" alt="web_user">
+  </a>
 
 ### Compress the model by using [NetsPresso Compression Toolkit](https://compression.netspresso.ai/)
 
-  #### Please check and follow the [NetsPresso Documentation](https://docs.netspresso.ai/docs)
+  * #### Please check and follow the [NetsPresso Documentation](https://docs.netspresso.ai/docs)
 
 ### Performance regain
   * #### The compression process might lead to performance deterioration. Therefore an additional training process is necessary for the performance regain (Especially the pruning process).
@@ -65,7 +65,7 @@
 
 ## Model Description
 
-* ### Compressed results of [CIFAR-100](https://www.cs.toronto.edu/~kriz/cifar.html) (/models/cifar100)
+* ### Compressed results of [CIFAR-100](https://www.cs.toronto.edu/~kriz/cifar.html) - /models/cifar100
 
   |    Network   |     Type    |    Acc (%)    |    FLOPs (M)    |   Params (M)  | Model Size (MB) |
   |:------------:|:-----------:|:-------------:|:---------------:|:-------------:|:---------------:|
@@ -79,7 +79,7 @@
   |              | Nota-Simple | 66.32 (-0.36) |  26.09 (3.56x)  |  0.53 (6.24x) |   2.52 (5.4x)   |
   |              | Nota-Search | 66.11 (-0.57) |  17.90 (5.19x)  |  0.35 (9.35x) |   1.78 (7.66x)  |
 
-* ### ImageNet Pretrained Model (/models/keras-applications)
+* ### ImageNet Pretrained Model - /models/keras-applications
   * #### Follow models are available now on [NetsPresso Compression Toolkit\*](https://compression.netspresso.ai/).
     | Model             | Support | Version       |
     | ----------------- | ------- | ------------- |
