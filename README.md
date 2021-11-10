@@ -2,9 +2,9 @@
 # Model Zoo for the NetsPresso Compression Toolkit
 
 ## Workflow
-  <a target="_blank" href="/imgs/compression_workflow.png">
+  <p align="center">
     <img src="/imgs/compression_workflow.png" alt="Workflow">
-  </a>
+  </p>
 
 ## Purpose of the Model Zoo
 * Verifying the NetsPresso Compression Toolkit.
