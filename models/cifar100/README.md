@@ -1,4 +1,4 @@
-## Compressed Results of [CIFAR-100](https://www.cs.toronto.edu/~kriz/cifar.html) - /models/cifar100
+## Compressed Results of [CIFAR-100](https://www.cs.toronto.edu/~kriz/cifar.html)
 
   |    Network   |     Type    |    Acc (%)    |    FLOPs (M)    |   Params (M)  | Model Size (MB) |
   |:------------:|:-----------:|:-------------:|:---------------:|:-------------:|:---------------:|
