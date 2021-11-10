@@ -2,11 +2,13 @@
 # Model Zoo for the NetsPresso Compression Toolkit
 
 ## Workflow
+
   <p align="center">
     <img src="/imgs/compression_workflow.png" alt="Workflow">
   </p>
 
 ## Purpose of the Model Zoo
+
 * Verifying the NetsPresso Compression Toolkit.
   * Training file, Original model and its compressed model are provided.
 * Providing the model zoo to help the beginner to try the [NetsPresso Compression Toolkit\*](https://compression.netspresso.ai/).
@@ -14,19 +16,26 @@
 
 
 ## Supported Deeplearning Frameworks
+
 * [TensorFlow\*](https://github.com/Intel-tensorflow/tensorflow), including [2.2.0](https://github.com/Intel-tensorflow/tensorflow/tree/v2.2.0), [2.3.0](https://github.com/Intel-tensorflow/tensorflow/tree/v2.3.0), [2.4.0](https://github.com/Intel-tensorflow/tensorflow/tree/v2.4.0), [2.5.0](https://github.com/Intel-tensorflow/tensorflow/tree/v2.5.0)
 * [PyTorch\*](https://pytorch.org/) version will be launched on Feb.
 
-## Installation
-```shell
-$ git clone https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo.git
-$ pip install -r requirements.txt
-```
-### For the Web User (Download Model)
-  <a target="_blank" href="/imgs/web_user_1.png">
-    <img src="/imgs/web_user_1.png" alt="Workflow">
-  </a>
+## Preparing the pre-trained model
 
+  ```shell
+  $ git clone https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo.git
+  $ pip install -r requirements.txt
+  ```
+
+  * ### For the Web User (Download public model only)
+  
+    <a target="_blank" href="/imgs/web_user_1.png">
+      <img src="/imgs/web_user_1.png" alt="web_user">
+    </a>
+
+## Compress the model by using [NetsPresso Compression Toolkit](https://compression.netspresso.ai/)
+
+* Please refer to the [NetsPresso D]
 
 <!-- * [Installation](#Installation)
 * [How to Use](#How-to-Use)
