@@ -23,7 +23,6 @@
 ## Detail Workflow of the NetsPresso Compression Toolkit
 
 ### Preparing the pre-trained model
-  #### Download current repository
   ```shell
   $ git clone https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo.git
   $ pip install -r requirements.txt
