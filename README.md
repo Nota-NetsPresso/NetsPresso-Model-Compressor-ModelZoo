@@ -28,18 +28,18 @@
   $ pip install -r requirements.txt
   ```
 
-  #### For the Web User
+  For the Web User
   <a target="_blank" href="/imgs/web_user_1.png">
     <img src="/imgs/web_user_1.png" alt="web_user">
   </a>
 
 ### Compress the model by using [NetsPresso Compression Toolkit](https://compression.netspresso.ai/)
 
-  * #### Please check and follow the [NetsPresso Documentation](https://docs.netspresso.ai/docs)
+  * Please check and follow the [NetsPresso Documentation](https://docs.netspresso.ai/docs).
 
 ### Performance regain
-  * #### The compression process might lead to performance deterioration. Therefore an additional training process is necessary for the performance regain (Especially the pruning process).
-  * #### For given CIFAR100 models
+  * The compression process might lead to performance deterioration. Therefore an additional training process is necessary for the performance regain (Especially the pruning process).
+  * For given CIFAR100 models
     ```shell
     $ python train.py --model_path ./models/cifar100/vgg19.h5 --save_path ./cifar100_vgg19 --learning_rate 0.01 --batch_size 128 --epochs 100
     ```
@@ -79,7 +79,7 @@
   |              | Nota-Search | 66.11 (-0.57) |  17.90 (5.19x)  |  0.35 (9.35x) |   1.78 (7.66x)  |
 
 * ### ImageNet Pretrained Models - /models/keras-applications
-  * #### Following models are available now on [NetsPresso Compression Toolkit](https://compression.netspresso.ai/).
+  * Following models are now available on [NetsPresso Compression Toolkit](https://compression.netspresso.ai/).
     | Model             | Support | Version       |
     | ----------------- | ------- | ------------- |
     | VGG16             | Yes     | 2.2.x - 2.5.x |
