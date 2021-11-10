@@ -11,7 +11,7 @@
 
 * Providing the model zoo to help the beginner to try the [NetsPresso Compression Toolkit](https://compression.netspresso.ai/).
 * Verifying the NetsPresso Compression Toolkit.
-  * Training file, Original model and its compressed model are provided.
+  * Training file, Original model, and its compressed model are provided.
 
 
 ## Supported Deeplearning Frameworks
