@@ -3,9 +3,8 @@
 
 ## Workflow
 <a target="_blank" href="/imgs/compression_workflow.png">
-  <img src="/imgs/compression_workflow.png" alt="Workflow" width=800 height=360>
+  <img src="/imgs/compression_workflow.png" alt="Workflow">
 </a>
-# NetsPresso Compression Toolkit Model Zoo
 
 * [Installation](#Installation)
 * [How to Use](#How-to-Use)
