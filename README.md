@@ -1,6 +1,10 @@
-![image](https://user-images.githubusercontent.com/33439998/140008537-2a3ee1d7-dc07-48e8-9989-a6131f932a0c.png)
 
+# Model Zoo for the NetsPresso Compression Toolkit
 
+## Workflow
+<a target="_blank" href="/imgs/compression_workflow.png">
+  <img src="/imgs/compression_workflow.png" alt="Workflow" width=800 height=360>
+</a>
 # NetsPresso Compression Toolkit Model Zoo
 
 * [Installation](#Installation)
