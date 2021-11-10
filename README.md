@@ -44,22 +44,23 @@
     $ python train.py --model_path ./models/cifar100/vgg19.h5 --save_path ./cifar100_vgg19 --learning_rate 0.01 --batch_size 128 --epochs 100
     ```
     ```
-      python train.py -h
-      usage: train.py [-h] --model_path MODEL_PATH --save_path SAVE_PATH
-                      [--learning_rate LEARNING_RATE] [--batch_size BATCH_SIZE]
-                      [--epochs EPOCHS]
+    python train.py -h
+    usage: train.py [-h] --model_path MODEL_PATH --save_path SAVE_PATH
+                    [--learning_rate LEARNING_RATE] [--batch_size BATCH_SIZE]
+                    [--epochs EPOCHS]
 
-      optional arguments:
-        -h, --help            show this help message and exit
-        --model_path MODEL_PATH
-                              input model path, default=models/cifar100/vgg19.h5
-        --save_path SAVE_PATH
-                              saved model path, default=./
-        --learning_rate LEARNING_RATE
-                              Initial learning rate, default=0.01
-        --batch_size BATCH_SIZE
-                              Batch size for train, default=128
-        --epochs EPOCHS       
+    optional arguments:
+      -h, --help          show this help message and exit
+      --model_path MODEL_PATH
+                            input model path, default=models/cifar100/vgg19.h5
+      --save_path SAVE_PATH
+                            saved model path, default=./
+      --learning_rate LEARNING_RATE
+                            Initial learning rate, default=0.01
+      --batch_size BATCH_SIZE
+                            Batch size for train, default=128
+      --epochs EPOCHS
+                            Total training epochs, default=100
     ```
 
 ## Model Descriptions
