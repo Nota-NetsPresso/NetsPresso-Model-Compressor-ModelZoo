@@ -22,22 +22,22 @@
 
 ## Detail Workflow of the NetsPresso Compression Toolkit
 
-### Preparing the pre-trained model
+### Preparing the Pre-trained Model
   ```shell
   $ git clone https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo.git
   $ pip install -r requirements.txt
   ```
 
-  For the Web User
+  For the web user
   <a target="_blank" href="/imgs/web_user_1.png">
     <img src="/imgs/web_user_1.png" alt="web_user">
   </a>
 
-### Compress the model by using [NetsPresso Compression Toolkit](https://compression.netspresso.ai/)
+### Compress the Model by Using [NetsPresso Compression Toolkit](https://compression.netspresso.ai/)
 
   * Please check and follow the [NetsPresso Documentation](https://docs.netspresso.ai/docs).
 
-### Performance regain
+### Performance Regain
   * The compression process might lead to performance deterioration. Therefore an additional training process is necessary for the performance regain (Especially the pruning process).
   * For given CIFAR100 models
     ```shell
@@ -64,7 +64,7 @@
 
 ## Model Descriptions
 
-* ### Compressed results of [CIFAR-100](https://www.cs.toronto.edu/~kriz/cifar.html) - /models/cifar100
+* ### Compressed Results of [CIFAR-100](https://www.cs.toronto.edu/~kriz/cifar.html) - /models/cifar100
 
   |    Network   |     Type    |    Acc (%)    |    FLOPs (M)    |   Params (M)  | Model Size (MB) |
   |:------------:|:-----------:|:-------------:|:---------------:|:-------------:|:---------------:|
