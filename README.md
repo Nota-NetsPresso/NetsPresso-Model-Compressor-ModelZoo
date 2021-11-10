@@ -63,7 +63,7 @@ Providing the model zoo to help the beginner to try the [NetsPresso Compression 
         --epochs EPOCHS       
     ```
 
-## Model Description
+## Model Descriptions
 
 * ### Compressed results of [CIFAR-100](https://www.cs.toronto.edu/~kriz/cifar.html) - /models/cifar100
 
@@ -79,8 +79,8 @@ Providing the model zoo to help the beginner to try the [NetsPresso Compression 
   |              | Nota-Simple | 66.32 (-0.36) |  26.09 (3.56x)  |  0.53 (6.24x) |   2.52 (5.4x)   |
   |              | Nota-Search | 66.11 (-0.57) |  17.90 (5.19x)  |  0.35 (9.35x) |   1.78 (7.66x)  |
 
-* ### ImageNet Pretrained Model - /models/keras-applications
-  * #### Follow models are available now on [NetsPresso Compression Toolkit](https://compression.netspresso.ai/).
+* ### ImageNet Pretrained Models - /models/keras-applications
+  * #### Following models are available now on [NetsPresso Compression Toolkit](https://compression.netspresso.ai/).
     | Model             | Support | Version       |
     | ----------------- | ------- | ------------- |
     | VGG16             | Yes     | 2.2.x - 2.5.x |
