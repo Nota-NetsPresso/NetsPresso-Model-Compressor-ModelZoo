@@ -2,9 +2,9 @@
 # Model Zoo for the NetsPresso Compression Toolkit
 
 ## Workflow
-<a target="_blank" href="/imgs/compression_workflow.png">
-  <img src="/imgs/compression_workflow.png" alt="Workflow">
-</a>
+  <a target="_blank" href="/imgs/compression_workflow.png">
+    <img src="/imgs/compression_workflow.png" alt="Workflow">
+  </a>
 
 ## Purpose of the Model Zoo
 * Verifying the NetsPresso Compression Toolkit.
@@ -18,13 +18,14 @@
 * [PyTorch\*](https://pytorch.org/) version will be launched on Feb.
 
 ## Installation
-### For Web User 
-<a target="_blank" href="/imgs/web_user_1.png">
-  <img src="/imgs/web_user_1.png" alt="Workflow">
-</a>
-<a target="_blank" href="/imgs/web_user_2.png">
-  <img src="/imgs/web_user_2.png" alt="Workflow">
-</a>
+### For Web User
+####
+  <a target="_blank" href="/imgs/web_user_1.png">
+    <img src="/imgs/web_user_1.png" alt="Workflow">
+  </a>
+  <a target="_blank" href="/imgs/web_user_2.png">
+    <img src="/imgs/web_user_2.png" alt="Workflow">
+  </a>
 
 ### Download all the models
 ```shell
