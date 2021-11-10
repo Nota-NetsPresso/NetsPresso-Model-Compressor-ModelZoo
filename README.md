@@ -18,20 +18,15 @@
 * [PyTorch\*](https://pytorch.org/) version will be launched on Feb.
 
 ## Installation
-### For Web User
-####
-  <a target="_blank" href="/imgs/web_user_1.png">
-    <img src="/imgs/web_user_1.png" alt="Workflow">
-  </a>
-  <a target="_blank" href="/imgs/web_user_2.png">
-    <img src="/imgs/web_user_2.png" alt="Workflow">
-  </a>
-
-### Download all the models
 ```shell
 $ git clone https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo.git
 $ pip install -r requirements.txt
 ```
+### For the Web User (Download Model)
+  <a target="_blank" href="/imgs/web_user_1.png">
+    <img src="/imgs/web_user_1.png" alt="Workflow">
+  </a>
+
 
 <!-- * [Installation](#Installation)
 * [How to Use](#How-to-Use)
