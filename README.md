@@ -16,7 +16,7 @@
 
 ## Supported Deeplearning Frameworks
 
-* [TensorFlow\*](https://github.com/Intel-tensorflow/tensorflow), including [2.2.0](https://github.com/Intel-tensorflow/tensorflow/tree/v2.2.0), [2.3.0](https://github.com/Intel-tensorflow/tensorflow/tree/v2.3.0), [2.4.0](https://github.com/Intel-tensorflow/tensorflow/tree/v2.4.0), [2.5.0](https://github.com/Intel-tensorflow/tensorflow/tree/v2.5.0)
+* [TensorFlow\*](https://github.com/tensorflow/tensorflow), including [2.2.0](https://github.com/tensorflow/tensorflow/tree/v2.2.0), [2.3.0](https://github.com/tensorflow/tensorflow/tree/v2.3.0), [2.4.0](https://github.com/tensorflow/tensorflow/tree/v2.4.0), [2.5.0](https://github.com/tensorflow/tensorflow/tree/v2.5.0)
 * [PyTorch\*](https://pytorch.org/) version will be launched on Feb.
 
 
@@ -62,6 +62,7 @@
         --batch_size BATCH_SIZE
                               Batch size for train, default=128
         --epochs EPOCHS       
+                              Total training epochs, default=100
     ```
 
 ## Provided Model Descriptions
