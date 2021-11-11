@@ -16,13 +16,13 @@
 
 ## Supported Deeplearning Frameworks
 
-* [TensorFlow\*](https://github.com/tensorflow/tensorflow), including [2.2.0](https://github.com/tensorflow/tensorflow/tree/v2.2.0), [2.3.0](https://github.com/tensorflow/tensorflow/tree/v2.3.0), [2.4.0](https://github.com/tensorflow/tensorflow/tree/v2.4.0), [2.5.0](https://github.com/tensorflow/tensorflow/tree/v2.5.0)
+* [TensorFlow\*](https://github.com/Intel-tensorflow/tensorflow), including [2.2.0](https://github.com/Intel-tensorflow/tensorflow/tree/v2.2.0), [2.3.0](https://github.com/Intel-tensorflow/tensorflow/tree/v2.3.0), [2.4.0](https://github.com/Intel-tensorflow/tensorflow/tree/v2.4.0), [2.5.0](https://github.com/Intel-tensorflow/tensorflow/tree/v2.5.0)
 * [PyTorch\*](https://pytorch.org/) version will be launched on Feb.
 
 
 ## Detail Workflow of the NetsPresso Compression Toolkit
 
-### Preparing the Pre-trained Model
+### Step 1. Preparing the Pre-trained Model
   ```shell
   $ git clone https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo.git
   $ pip install -r requirements.txt
@@ -33,37 +33,38 @@
     <img src="/imgs/web_user_1.png" alt="web_user">
   </a>
 
-### Compress the Model by Using [NetsPresso Compression Toolkit](https://compression.netspresso.ai/)
+### Step 2. Compress the Model by Using [NetsPresso Compression Toolkit](https://compression.netspresso.ai/)
 
-  * Please check and follow the [NetsPresso Documentation](https://docs.netspresso.ai/docs).
+  * Please follow the [Quickstart](https://docs.netspresso.ai/docs/step1-upload-model) of the NetsPresso Compression Toolkit.
+  * For more detail please refer to the [NetsPresso Documentation](https://docs.netspresso.ai/docs).
 
-### Performance Regain
+
+### Step 3. Performance Regain
   * The compression process might lead to performance deterioration. Therefore an additional training process is necessary for the performance regain (Especially the pruning process).
   * For given CIFAR100 models
     ```shell
     $ python train.py --model_path ./models/cifar100/vgg19.h5 --save_path ./cifar100_vgg19 --learning_rate 0.01 --batch_size 128 --epochs 100
     ```
     ```
-    python train.py -h
-    usage: train.py [-h] --model_path MODEL_PATH --save_path SAVE_PATH
-                    [--learning_rate LEARNING_RATE] [--batch_size BATCH_SIZE]
-                    [--epochs EPOCHS]
+      python train.py -h
+      usage: train.py [-h] --model_path MODEL_PATH --save_path SAVE_PATH
+                      [--learning_rate LEARNING_RATE] [--batch_size BATCH_SIZE]
+                      [--epochs EPOCHS]
 
-    optional arguments:
-      -h, --help          show this help message and exit
-      --model_path MODEL_PATH
-                            input model path, default=models/cifar100/vgg19.h5
-      --save_path SAVE_PATH
-                            saved model path, default=./
-      --learning_rate LEARNING_RATE
-                            Initial learning rate, default=0.01
-      --batch_size BATCH_SIZE
-                            Batch size for train, default=128
-      --epochs EPOCHS
-                            Total training epochs, default=100
+      optional arguments:
+        -h, --help            show this help message and exit
+        --model_path MODEL_PATH
+                              input model path, default=models/cifar100/vgg19.h5
+        --save_path SAVE_PATH
+                              saved model path, default=./
+        --learning_rate LEARNING_RATE
+                              Initial learning rate, default=0.01
+        --batch_size BATCH_SIZE
+                              Batch size for train, default=128
+        --epochs EPOCHS       
     ```
 
-## Model Descriptions
+## Provided Model Descriptions
 
 * ### Compressed Results of [CIFAR-100](https://www.cs.toronto.edu/~kriz/cifar.html) - /models/cifar100
 
