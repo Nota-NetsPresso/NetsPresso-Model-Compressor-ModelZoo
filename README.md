@@ -4,7 +4,7 @@
 ## Workflow
 
   <p align="center">
-    <img src="/imgs/compression_workflow.png" alt="Workflow">
+    <img src="/imgs/overall_workflow.png" alt="Workflow">
   </p>
 
 ## Purpose of the Model Zoo
