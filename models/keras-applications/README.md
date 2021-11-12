@@ -14,7 +14,6 @@ The table below contains list of supported Tensorflow verions.
 
 | Model             | Support | Version       |
 | ----------------- | ------- | ------------- |
-| Xception          | WIP     |               |
 | VGG16             | Yes     | 2.2.x - 2.5.x |
 | VGG19             | Yes     | 2.2.x - 2.5.x |
 | ResNet50          | Yes     | 2.2.x - 2.5.x |
@@ -24,11 +23,12 @@ The table below contains list of supported Tensorflow verions.
 | ResNet101V2       | Yes     | 2.2.x - 2.5.x |
 | ResNet152V2       | Yes     | 2.2.x - 2.5.x |
 | InceptionV3       | Yes     | 2.2.x - 2.5.x |
-| InceptionResNetV2 | WIP     |               |
-| NASNet            | WIP     |               |
 | MobileNet         | Yes     | 2.2.x - 2.5.x |
 | MobileNetV2       | Yes     | 2.2.x - 2.5.x |
 | DenseNet121       | Yes     | 2.2.x - 2.5.x |
 | DenseNet169       | Yes     | 2.2.x - 2.5.x |
 | DenseNet201       | Yes     | 2.2.x - 2.5.x |
 | EfficientNetB1-B7 | Yes     | 2.3.x - 2.5.x |
+| Xception          | WIP     |               |
+| InceptionResNetV2 | WIP     |               |
+| NASNet            | WIP     |               |
