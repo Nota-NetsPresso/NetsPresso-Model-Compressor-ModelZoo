@@ -9,26 +9,25 @@ We provide a collection of saved models from tf.keras.applications ([r2.2](https
 
 
 ## Supported TF Versions
-
-The table below contains list of supported Tensorflow verions.
-
-| Model             | Support | Version       |
-| ----------------- | ------- | ------------- |
-| VGG16             | Yes     | 2.2.x - 2.5.x |
-| VGG19             | Yes     | 2.2.x - 2.5.x |
-| ResNet50          | Yes     | 2.2.x - 2.5.x |
-| ResNet101         | Yes     | 2.2.x - 2.5.x |
-| ResNet152         | Yes     | 2.2.x - 2.5.x |
-| ResNet50V2        | Yes     | 2.2.x - 2.5.x |
-| ResNet101V2       | Yes     | 2.2.x - 2.5.x |
-| ResNet152V2       | Yes     | 2.2.x - 2.5.x |
-| InceptionV3       | Yes     | 2.2.x - 2.5.x |
-| MobileNet         | Yes     | 2.2.x - 2.5.x |
-| MobileNetV2       | Yes     | 2.2.x - 2.5.x |
-| DenseNet121       | Yes     | 2.2.x - 2.5.x |
-| DenseNet169       | Yes     | 2.2.x - 2.5.x |
-| DenseNet201       | Yes     | 2.2.x - 2.5.x |
-| EfficientNetB1-B7 | Yes     | 2.3.x - 2.5.x |
-| Xception          | WIP     |               |
-| InceptionResNetV2 | WIP     |               |
-| NASNet            | WIP     |               |
+* ### ImageNet Pretrained Models - /models/keras-applications
+  * Following models are now available on [NetsPresso Compression Toolkit](https://compression.netspresso.ai/).
+    |       Model       |  FD | Pruning |    Version    |
+    |:-----------------:|:---:|:-------:|:-------------:|
+    |       VGG16       | Yes |   Yes   | 2.2.x - 2.5.x |
+    |       VGG19       | Yes |   Yes   | 2.2.x - 2.5.x |
+    |      ResNet50     | Yes |   Yes   | 2.2.x - 2.5.x |
+    |     ResNet101     | Yes |   Yes   | 2.2.x - 2.5.x |
+    |     ResNet152     | Yes |   Yes   | 2.2.x - 2.5.x |
+    |     ResNet50V2    | Yes |   Yes   | 2.2.x - 2.5.x |
+    |    ResNet101V2    | Yes |   Yes   | 2.2.x - 2.5.x |
+    |    ResNet152V2    | Yes |   Yes   | 2.2.x - 2.5.x |
+    |    InceptionV3    | Yes |   Yes   | 2.2.x - 2.5.x |
+    |     MobileNet     | Yes |   Yes   | 2.2.x - 2.5.x |
+    |    MobileNetV2    | Yes |   Yes   | 2.2.x - 2.5.x |
+    |    DenseNet121    | Yes |   Yes   | 2.2.x - 2.5.x |
+    |    DenseNet169    | Yes |   Yes   | 2.2.x - 2.5.x |
+    |    DenseNet201    | Yes |   Yes   | 2.2.x - 2.5.x |
+    | EfficientNetB1-B7 | Yes |   Yes   | 2.3.x - 2.5.x |
+    |      Xception     | Yes |   WIP   | 2.3.x - 2.5.x |
+    | InceptionResNetV2 | Yes |   WIP   | 2.3.x - 2.5.x |
+    |       NASNet      | Yes |   WIP   | 2.3.x - 2.5.x |
