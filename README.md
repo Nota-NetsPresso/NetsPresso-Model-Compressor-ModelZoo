@@ -35,7 +35,6 @@
 
 ### Step 2. Compress the Model by Using [NetsPresso Compression Toolkit](https://compression.netspresso.ai/)
 
-  * Please follow the [Quickstart](https://docs.netspresso.ai/docs/step1-upload-model) of the NetsPresso Compression Toolkit.
   * For more detail please refer to the [NetsPresso Documentation](https://docs.netspresso.ai/docs).
 
 
