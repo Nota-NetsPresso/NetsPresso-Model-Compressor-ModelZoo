@@ -28,6 +28,6 @@ We provide a collection of saved models from tf.keras.applications ([r2.2](https
     |    DenseNet169    | Yes |   Yes   | 2.2.x - 2.5.x |
     |    DenseNet201    | Yes |   Yes   | 2.2.x - 2.5.x |
     | EfficientNetB1-B7 | Yes |   Yes   | 2.3.x - 2.5.x |
-    |      Xception     | Yes |   WIP   | 2.3.x - 2.5.x |
+    |      Xception     | Yes |   Yes   | 2.3.x - 2.5.x |
     | InceptionResNetV2 | Yes |   WIP   | 2.3.x - 2.5.x |
     |       NASNet      | Yes |   WIP   | 2.3.x - 2.5.x |
