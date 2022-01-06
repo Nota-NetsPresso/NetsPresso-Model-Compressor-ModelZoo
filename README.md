@@ -20,4 +20,4 @@
 ## Supported Deeplearning Frameworks
 
 * [TensorFlow\*](https://github.com/tensorflow/tensorflow), including [2.2.0](https://github.com/tensorflow/tensorflow/tree/v2.2.0), [2.3.0](https://github.com/tensorflow/tensorflow/tree/v2.3.0), [2.4.0](https://github.com/tensorflow/tensorflow/tree/v2.4.0), [2.5.0](https://github.com/tensorflow/tensorflow/tree/v2.5.0)
-* [PyTorch\*](https://pytorch.org/) version will be launched on Feb.
+* [PyTorch\*](https://pytorch.org/), version >= 1.10
