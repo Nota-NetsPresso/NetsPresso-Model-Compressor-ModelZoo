@@ -50,7 +50,7 @@
 
 ## Provided Model Descriptions
 
-* ### Compressed Results of [CIFAR-100](https://www.cs.toronto.edu/~kriz/cifar.html) - /models/cifar100
+* ### Compressed Results of [CIFAR-100](https://www.cs.toronto.edu/~kriz/cifar.html) - /models/tensorflow/cifar100
 
   |    Network   |     Type    |    Acc (%)    |    FLOPs (M)    |   Params (M)  | Model Size (MB) |
   |:------------:|:-----------:|:-------------:|:---------------:|:-------------:|:---------------:|
@@ -64,7 +64,7 @@
   |              | Nota-Simple | 66.32 (-0.36) |  26.09 (3.56x)  |  0.53 (6.24x) |   2.52 (5.4x)   |
   |              | Nota-Search | 66.11 (-0.57) |  17.90 (5.19x)  |  0.35 (9.35x) |   1.78 (7.66x)  |
 
-* ### ImageNet Pretrained Models - /models/keras-applications
+* ### ImageNet Pretrained Models - /models/tensorflow/keras-applications
   * Following models are now available on [NetsPresso Compression Toolkit](https://compression.netspresso.ai/).
     |       Model       |  FD | Pruning |    Version    |
     |:-----------------:|:---:|:-------:|:-------------:|
