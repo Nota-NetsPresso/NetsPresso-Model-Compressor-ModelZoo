@@ -7,7 +7,7 @@
 ### **To call onnx.export**
 * Model (Required)
 * Input value (Required)
-* output value (Optional)
+* Output value (Optional)
 
 
 
