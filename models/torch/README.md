@@ -36,11 +36,12 @@
 ```python
 from torchvision.models import resnet18
 import torch
+from torch.onnx import TrainingMode
 
 input_tensor = torch.rand(torch.Size([1, 3, 224, 224]))
 model = resnet18(pretrained=True)
 dummy_output = model(input_tensor)
-torch.onnx.export(model, input_tensor, "resnet18.onnx", verbose=True, example_outputs=dummy_output)
+torch.onnx.export(model, input_tensor, "resnet18.onnx", verbose=True, example_outputs=dummy_output, training=TrainingMode.TRAINING)
 ```
 
 
