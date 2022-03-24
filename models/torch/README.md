@@ -53,6 +53,7 @@ torch.onnx.export(model, input_tensor, "resnet18.onnx", verbose=True, example_ou
 import torch
 from torch.nn import functional as F
 from torch import nn
+from torch.onnx import TrainingMode
 
 class Net(nn.Module):
     def __init__(self):
