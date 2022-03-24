@@ -80,5 +80,5 @@ class Net(nn.Module):
 simple_model= Net()
 input_tensor = torch.rand(torch.Size([1, 3, 224, 224]))
 dummy_output = simple_model(input_tensor)
-torch.onnx.export(simple_model, input_tensor, "simple_model.onnx", verbose=True, example_outputs=dummy_output)
+torch.onnx.export(simple_model, input_tensor, "simple_model.onnx", verbose=True, example_outputs=dummy_output, training=TrainingMode.TRAINING)
 ```
