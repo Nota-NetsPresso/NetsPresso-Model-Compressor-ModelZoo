@@ -81,7 +81,6 @@ We provide a collection of saved models from tf.keras.applications ([r2.2](https
   - [EfficientNetB5.h5](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/tensorflow/keras-application/2.3.x/EfficientNetB5.h5)
   - [EfficientNetB6.h5](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/tensorflow/keras-application/2.3.x/EfficientNetB6.h5)
   - [EfficientNetB7.h5](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/tensorflow/keras-application/2.3.x/EfficientNetB7.h5)
-  - [InceptionResNetV2.h5](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/tensorflow/keras-application/2.3.x/InceptionResNetV2.h5)
   
 - tf 2.4.x
   - [DenseNet121.h5](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/tensorflow/keras-application/2.4.x/DenseNet121.h5)
@@ -109,7 +108,6 @@ We provide a collection of saved models from tf.keras.applications ([r2.2](https
   - [EfficientNetB5.h5](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/tensorflow/keras-application/2.4.x/EfficientNetB5.h5)
   - [EfficientNetB6.h5](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/tensorflow/keras-application/2.4.x/EfficientNetB6.h5)
   - [EfficientNetB7.h5](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/tensorflow/keras-application/2.4.x/EfficientNetB7.h5)
-  - [InceptionResNetV2.h5](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/tensorflow/keras-application/2.4.x/InceptionResNetV2.h5)
 
 - tf 2.5.x
   - [DenseNet121.h5](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/tensorflow/keras-application/2.5.x/DenseNet121.h5)
@@ -137,4 +135,3 @@ We provide a collection of saved models from tf.keras.applications ([r2.2](https
   - [EfficientNetB5.h5](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/tensorflow/keras-application/2.5.x/EfficientNetB5.h5)
   - [EfficientNetB6.h5](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/tensorflow/keras-application/2.5.x/EfficientNetB6.h5)
   - [EfficientNetB7.h5](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/tensorflow/keras-application/2.5.x/EfficientNetB7.h5)
-  - [InceptionResNetV2.h5](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/tensorflow/keras-application/2.5.x/InceptionResNetV2.h5)
