@@ -1,7 +1,7 @@
 ## Best Practice Links
-- [torch](best_practices/torch/README.md)
-  - [cifar100_models](./best_practices/torch/cifar100_models)
+- [torch](https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/tree/main/best_practices/torch/README.md)
+  - [cifar100_models](https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/tree/main/best_practices/torch/CIFAR100_models)
 
-- [tensorflow-keras](best_practices/tensorflow/README.md)
-  - [cifar100_models](./best_practices/tensorflow/cifar100_models)
-  - [pascal_voc_models](./best_practices/tensorflow/pascal_voc_models)
+- [tensorflow-keras](https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/tree/main/best_practices/tensorflow/README.md)
+  - [cifar100_models](https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/tree/main/best_practices/tensorflow/CIFAR100_models)
+  - [pascal_voc_models](https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/tree/main/best_practices/tensorflow/PASCAL_VOC_models)
