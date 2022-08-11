@@ -1,7 +1,7 @@
 ## Best Practice - Pytorch
 ### CIFAR100 models
 The original CIFAR100 models are from [here](https://github.com/chenyaofo/pytorch-cifar-models). 
-|Model|NPTK Process|Accuracy (%)|FLOPs (M)|Params (M)|Latency (ms)|Best Practice Link|Colab Link|
+|Model|NPTK Process|Accuracy (%)|FLOPs (M)|Params (M)|Latency (ms)|.ipynb|Colab|
 |:---:|:---|:---|:---|:---|:---|:---:|---|
 |VGG16|P (0.4)|71.89 (-2.11)|433.00 (1.45x)|5.16 (2.97x)|24.52 (2.91x)|[link](./cifar100_models/VGG16.ipynb)|[![](https://colab.research.google.com/assets/colab-badge.svg)]()|
 |VGG16|P (0.7)|67.67 (-6.23)|212.74 (2.96x)|1.25 (12.19x)|11.34 (6.32x)|[link](./cifar100_models/VGG16.ipynb)|[![](https://colab.research.google.com/assets/colab-badge.svg)]()|
