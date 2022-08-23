@@ -18,4 +18,4 @@ The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).
 |YOLOv4|FD(0.2) &rarr; P(0.6)|87.23 (+5.01)|11459.69 (5.4x)|2.75 (7.49x)|639.12 (2.16x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/pascal_voc_models/YOLOv4.ipynb)|
 |YOLOv4|P (0.8)|87.91 (+5.69)|14437.96 (4.29x)|10.71 (6.1x)|631.90 (2.10x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/pascal_voc_models/YOLOv4.ipynb)|
 
-The model's latency is measured using a Intel(R) Xeon(R) CPU (2.00GHz x86_64).
+The model's latency is measured using a Intel Xeon CPU (2.00GHz x86_64).
