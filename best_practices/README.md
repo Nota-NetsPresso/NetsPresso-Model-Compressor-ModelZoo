@@ -22,7 +22,6 @@ The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).
 
 The model's latency is measured using a Intel Xeon CPU (2.00GHz x86_64).
 
-
 - [tensorflow-keras](https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/tree/main/best_practices/tensorflow/)
   - [cifar100_models](https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/tree/main/best_practices/tensorflow/cifar100_models)
   - [pascal_voc_models](https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/tree/main/best_practices/tensorflow/pascal_voc_models)
@@ -43,7 +42,6 @@ The original CIFAR100 models are from [here](https://github.com/chenyaofo/pytorc
 |RepVGG|P (0.75)|70.19 (-6.25)|725.71 (2.36x)|3.00 (4.32x)|51.69 (4.80x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/torch/cifar100_models/RepVGG.ipynb)|
 
 The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).  
-
 
 - [torch](https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/tree/main/best_practices/torch/)
   - [cifar100_models](https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/tree/main/best_practices/torch/cifar100_models)
