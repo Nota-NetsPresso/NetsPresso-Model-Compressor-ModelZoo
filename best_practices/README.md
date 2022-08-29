@@ -5,13 +5,13 @@
 |Model|Type|Accuracy (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
 |:---:|:---:|:---|:---|:---|:---|:---|:---:|
 |VGG19|Original|72.28|796.79|20.09|189.31|78.69|
-|VGG19|Compressed|71.13 (-1.15)|132.20 (6.03x)|1.17 (17.13x)|12.85 (14.73x)|To be updated|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/cifar100_models/VGG19.ipynb)|
+|VGG19|Compressed|71.13 (-1.15)|132.20 (6.03x)|1.17 (17.13x)|12.85 (14.73x)|4.98 ()|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/cifar100_models/VGG19.ipynb)|
 |VGG19|Compressed (Adv.)|71.14 (-1.14)|100.09 (7.96x)|0.66 (30.38x)|4.5 (42.06x)|5.68||
 |ResNet50|Original|78.03|2596.06|23.71|450.14|93.31|
 |ResNet50|Compressed|76.92 (-1.11)|613.43 (4.23x)|2.64 (8.99x)|130.39 (3.45x)|To be updated|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/cifar100_models/ResNet50.ipynb)|
 |ResNet50|Compressed (Adv.)|76.63 (-1.4)|224.70 (11.55x)|2.17 (10.91x)|48.37 (9.31x)|18.35||
 |MobileNetV1|Original|66.68|92.90|3.31|35.61|13.28|
-|MobileNetV1|Compressed| 66.32 (-0.36)|26.09 (3.56x)| 0.53 (6.24x)|3.66 (9.73x)|To be updated|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/cifar100_models/MobileNetV1.ipynb)|
+|MobileNetV1|Compressed| 66.32 (-0.36)|26.09 (3.56x)| 0.53 (6.24x)|3.66 (9.73x)|2.38|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/cifar100_models/MobileNetV1.ipynb)|
 |MobileNetV1|Compressed (Adv.)|66.11 (-0.57)|17.90 (5.19x)|0.35 (9.35x)|2.08 (17.12x)|3.3||
 
 The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).
