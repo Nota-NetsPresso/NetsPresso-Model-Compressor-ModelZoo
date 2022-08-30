@@ -1,3 +1,14 @@
+<div align=right>
+  <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FNota-NetsPresso%2FNetsPresso-Model-Compressor-ModelZoo&count_bg=%23327EEA&title_bg=%23555555&icon=&icon_color=%231ABAFD&title=hits&edge_flat=false"/></a>
+</div>
+
+## Workflow
+
+  <p align="center">
+    <img src="/imgs/workflow-MC.png" alt="Workflow">
+  </p>
+
+
 ## Tensorflow
 ### CIFAR100 models
 |Model|Type|Accuracy (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
