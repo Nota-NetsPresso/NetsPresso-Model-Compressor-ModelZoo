@@ -1,5 +1,3 @@
-## Workflow
-
 ## Tensorflow
 ### CIFAR100 models
 |Model|Type|Accuracy (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
