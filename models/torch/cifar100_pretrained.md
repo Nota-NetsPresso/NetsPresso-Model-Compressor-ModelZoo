@@ -11,7 +11,7 @@
 |RepVGG|Compressed-2|70.19 (-6.25)|725.71 (2.36x)|3.00 (4.32x)|51.69 (4.80x)|11.62 (4.40x)|
 
 
-### Pre-trained models(onnx)
+### Pre-trained Models(onnx)
 
 - [cifar100-mobilenetv2.onnx](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_mobilenetv2_x1_0.onnx)
 - [cifar100-repvgg-a1.onnx](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_repvgg_a1.onnx)
