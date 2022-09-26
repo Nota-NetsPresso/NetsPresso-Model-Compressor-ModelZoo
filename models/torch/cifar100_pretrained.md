@@ -18,7 +18,7 @@
 - [cifar100-resnet56.onnx](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_resnet56.onnx)
 - [cifar100-vgg16-bn.onnx](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_vgg16_bn.onnx)
 
-### Compressed Models
+### Compressed Models(pt)
 - [VGG16_compressed1.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/compressed/VGG16_compressed1.pt)
 - [VGG16_compressed2.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/compressed/VGG16_compressed2.pt)
 - [MobileNetV2_compressed.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/compressed/MobileNetV2_compressed.pt)
