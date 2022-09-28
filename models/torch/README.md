@@ -1,6 +1,6 @@
 # Model Zoo for the NetsPresso Compression Toolkit
 ## Provided Model Descriptions
-* ### ImageNet Pretrained Models - /models/torch/torchvision
+* ### ImageNet Pretrained Models - /models/torch/torchvision [(link)](https://pytorch.org/vision/0.8/models.html#classification)
   * Following models are now available on [NetsPresso Compression Toolkit](https://compression.netspresso.ai/).
     |       Model       |  FD | Pruning |   ONNX & torch Version    |
     |:-----------------:|:---:|:-------:|:-------------:|
@@ -15,9 +15,14 @@
     |     Wide ResNet50_2     | Yes |   Yes   | 1.10.x        |
     |    MNASNet1_0    | Yes |   Yes   | 1.10.x        |
     |    EfficientNet_b0    | Yes |   Yes   | 1.10.x        |
-    |    ResNext50_32x4d    | Yes |   WIP   | 1.10.x        |
-    |    RegNet_y_400mf    | Yes |   WIP   | 1.10.x        |
-    | RegNet_x_400mf | Yes |   WIP   | 1.10.x        |
+    |    ResNext50_32x4d    | Yes |   Yes   | 1.10.x        |
+    |    RegNet_y_400mf    | Yes |   Yes   | 1.10.x        |
+    | RegNet_x_400mf | Yes |   Yes   | 1.10.x        |
+* ### Subset of COCO Pretrained models - /models/torch/torchvision [(link)](https://pytorch.org/vision/0.8/models.html#semantic-segmentation)
+  * Following models are now available on [NetsPresso Compression Toolkit](https://compression.netspresso.ai/).
+    |       Model       |  FD | Pruning |   ONNX & torch Version    |
+    |:-----------------:|:---:|:-------:|:-------------:|
+    | FCN_ResNet101 | Yes | Yes | 1.10.x        |
 
 ## Conversion of PyTorch into ONNX
 * ### Input shape of the model should be specified to convert to ONNX.
