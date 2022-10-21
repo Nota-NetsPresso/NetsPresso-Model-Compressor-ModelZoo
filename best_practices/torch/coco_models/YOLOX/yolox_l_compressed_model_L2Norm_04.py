@@ -40,8 +40,6 @@ class RetrainUtils(nn.Module):
 
         for k, output in enumerate(outputs):
             stride_this_level = self.strides[k]
-            # (reg_output, obj_output, cls_output) = torch.split(output,[4,1,20],dim=1)
-            # reg_output = reg_output.clone()
             reg_output = output[:,:4,:,:].clone()
             output, grid = self.get_output_and_grid(
                 output, k, stride_this_level, output.type()
@@ -72,7 +70,7 @@ class RetrainUtils(nn.Module):
 
         batch_size = output.shape[0]
         n_ch = 5 + self.num_classes
-        hsize, wsize = output.shape[-2:] # 다 다름 ex)[] 64 64 / 32 32 /16 16 ]/ 76 76 ...
+        hsize, wsize = output.shape[-2:]
         if grid.shape[2:4] != output.shape[2:4]:
             yv, xv = meshgrid([torch.arange(hsize), torch.arange(wsize)])
             grid = torch.stack((xv, yv), 2).view(1, 1, hsize, wsize, 2).type(dtype)
@@ -88,9 +86,9 @@ class RetrainUtils(nn.Module):
         return output, grid
 
     def get_losses(self, x_shifts, y_shifts, expanded_strides, labels, outputs, origin_preds, dtype):
-        bbox_preds = outputs[:, :, :4]  # [batch, 10710, 4]
-        obj_preds = outputs[:, :, 4].unsqueeze(-1)  # [batch, 10710, 1]
-        cls_preds = outputs[:, :, 5:]  # [batch, 10710, 11]
+        bbox_preds = outputs[:, :, :4] 
+        obj_preds = outputs[:, :, 4].unsqueeze(-1)  
+        cls_preds = outputs[:, :, 5:]  
 
         n_label = (labels.sum(dim=2) > 0).sum(dim=1)
         total_num_anchors = outputs.shape[1]
@@ -113,24 +111,23 @@ class RetrainUtils(nn.Module):
             num_gt = int(n_label[batch_idx])
             num_gts += num_gt
             if num_gt == 0:
-                cls_target = outputs.new_zeros((0, self.num_classes)) # new_zeros -> 안의 size만큼 0으로 채우고, dtype와 device는 target tensor를 따른다.
+                cls_target = outputs.new_zeros((0, self.num_classes)) 
                 reg_target = outputs.new_zeros((0, 4))
                 l1_target = outputs.new_zeros((0, 4))
                 obj_target = outputs.new_zeros((total_num_anchors, 1))
                 fg_mask = outputs.new_zeros(total_num_anchors).bool()
             else:
-                # print(f"labels : {labels.type()}")
                 gt_bboxes_per_image = labels[batch_idx, :num_gt, 1:5]
                 gt_classes = labels[batch_idx, :num_gt, 0]
                 bboxes_preds_per_image = bbox_preds[batch_idx]
 
                 try:
                     (
-                        gt_matched_classes, # preds와 매칭된 classes들 -> [num_fg_img]
-                        fg_mask, # grid의 중심이 gt_bbox안에 들어오거나, cneter_radius안에 들어오는 anchor index [True or False] -> [10710] foreground
-                        pred_ious_this_matching, # preds중에서 gt와 매칭된 애들과 그 애들의 ious -> [num_fg_img]
-                        matched_gt_inds, # 매칭된 gt들의 indexes -> [num_fg_img]
-                        num_fg_img, # pred들 중 gt와 매칭이 된 애들의 갯수
+                        gt_matched_classes,
+                        fg_mask, 
+                        pred_ious_this_matching,
+                        matched_gt_inds, 
+                        num_fg_img, 
                     ) = self.get_assignments(
                         batch_idx,
                         num_gt,
@@ -179,9 +176,9 @@ class RetrainUtils(nn.Module):
                 num_fg += num_fg_img
                 cls_target = F.one_hot(
                     gt_matched_classes.to(torch.int64), self.num_classes
-                ) * pred_ious_this_matching.unsqueeze(-1) # [num_fg_img, 11] * [num_fg_img, 1] = [num_fg_img, 11]
-                obj_target = fg_mask.unsqueeze(-1).to(self.device) # [10710, 1]
-                reg_target = gt_bboxes_per_image[matched_gt_inds] # [num_fg_img, 4]
+                ) * pred_ious_this_matching.unsqueeze(-1) 
+                obj_target = fg_mask.unsqueeze(-1).to(self.device)
+                reg_target = gt_bboxes_per_image[matched_gt_inds]
                 if self.use_l1:
                     l1_target = self.get_l1_target(
                         outputs.new_zeros((num_fg_img, 4)),
@@ -191,40 +188,34 @@ class RetrainUtils(nn.Module):
                         y_shifts=y_shifts[0][fg_mask],
                     )
 
-            cls_targets.append(cls_target) # [num_fg_img, 11]
-            reg_targets.append(reg_target) # [num_fg_img, 4]
-            obj_targets.append(obj_target.type(dtype)) # [10710*batch, 1]
-            fg_masks.append(fg_mask) # [10710]
+            cls_targets.append(cls_target) 
+            reg_targets.append(reg_target)
+            obj_targets.append(obj_target.type(dtype)) 
+            fg_masks.append(fg_mask)
             if self.use_l1:
                 l1_targets.append(l1_target)
 
-        cls_targets = torch.cat(cls_targets, 0) # [num_fg ,11]            
-        reg_targets = torch.cat(reg_targets, 0) # [num_fg ,4]
-        obj_targets = torch.cat(obj_targets, 0).to(self.device) # [10710*batch ,1]
-        fg_masks = torch.cat(fg_masks, 0) # [10710*batch]
+        cls_targets = torch.cat(cls_targets, 0)            
+        reg_targets = torch.cat(reg_targets, 0) 
+        obj_targets = torch.cat(obj_targets, 0).to(self.device)
+        fg_masks = torch.cat(fg_masks, 0) 
         if self.use_l1:
             l1_targets = torch.cat(l1_targets, 0)
-        # print(f"iou : {bbox_preds.view(-1, 4)[fg_masks].size()}, {reg_targets.size()}")
+        
         num_fg = max(num_fg, 1)
         loss_iou = (
             self.iou_loss(bbox_preds.view(-1, 4)[fg_masks], reg_targets)
         ).sum() / num_fg
-        # print(f"size : {bbox_preds.size()} bbox_preds : {bbox_preds}")
-        # print(f"size : {reg_targets.size()} reg_targets : {reg_targets}")
-        # print(f"obj : {obj_preds.view(-1, 1).size()}, {obj_targets.size()}")
-        # print(f"obj : {obj_preds.get_device()}, {obj_targets.get_device()}")
+       
         loss_obj = (
             self.bcewithlog_loss(obj_preds.view(-1, 1), obj_targets)
         ).sum() / num_fg
-        # print(f"cls : {cls_preds.view(-1, self.num_classes)[fg_masks].size()}, {cls_targets.size()}")
-        # print(f"cls_preds : {cls_preds.type()}, cls_targets : {cls_targets.type()}")
+    
         loss_cls = (
             self.bcewithlog_loss(
                 cls_preds.view(-1, self.num_classes)[fg_masks], cls_targets
             )
         ).sum() / num_fg
-        # print(f"size : {cls_preds.size()} cls_preds : {cls_preds}")
-        # print(f"size : {cls_targets.size()} cls_targets : {cls_targets}")
         if self.use_l1:
             loss_l1 = (
                 self.l1_loss(origin_preds.view(-1, 4)[fg_masks], l1_targets)
@@ -232,7 +223,6 @@ class RetrainUtils(nn.Module):
         else:
             loss_l1 = 0.0
         reg_weight = 5.0
-        # print(f"loss_iou : {loss_iou}, loss_obj : {loss_obj}, loss_cls : {loss_cls}")
         loss = reg_weight * loss_iou + loss_obj + loss_cls + loss_l1
 
         return (
@@ -259,7 +249,7 @@ class RetrainUtils(nn.Module):
         num_gt, 
         total_num_anchors,
         gt_bboxes_per_image,
-        gt_classes, # [num_gt]
+        gt_classes,
         bboxes_preds_per_image,
         expanded_strides,
         x_shifts,
@@ -270,14 +260,6 @@ class RetrainUtils(nn.Module):
         labels,
         mode="gpu",
     ):
-        # if mode == "cpu":
-            # print("------------CPU Mode for This Batch-------------")
-            # gt_bboxes_per_image = gt_bboxes_per_image.cpu().float()
-            # bboxes_preds_per_image = bboxes_preds_per_image.cpu().float()
-            # gt_classes = gt_classes.cpu().float()
-            # expanded_strides = expanded_strides.cpu().float()
-            # x_shifts = x_shifts.cpu()
-            # y_shifts = y_shifts.cpu()
         gt_bboxes_per_image = gt_bboxes_per_image.to(self.device)
         bboxes_preds_per_image = bboxes_preds_per_image.to(self.device)
         gt_classes = gt_classes.to(self.device)
@@ -294,40 +276,31 @@ class RetrainUtils(nn.Module):
             num_gt
         )
         
-        bboxes_preds_per_image = bboxes_preds_per_image[fg_mask] # [fg_num, 4]
-        cls_preds_ = cls_preds[batch_idx][fg_mask] # [fg_num, 11]
-        obj_preds_ = obj_preds[batch_idx][fg_mask] # [fg_num, 1]
+        bboxes_preds_per_image = bboxes_preds_per_image[fg_mask] 
+        cls_preds_ = cls_preds[batch_idx][fg_mask] 
+        obj_preds_ = obj_preds[batch_idx][fg_mask]
         num_in_boxes_anchor = bboxes_preds_per_image.shape[0]
 
-        # if mode == "cpu":
-        #     gt_bboxes_per_image = gt_bboxes_per_image.cpu()
-        #     bboxes_preds_per_image = bboxes_preds_per_image.cpu()
-        # print(f"gt_bboxes : {gt_bboxes_per_image.type()}, preds_bboxes : {bboxes_preds_per_image.type()}") # FloatTensor, FloatTensor
         pair_wise_ious = bboxes_iou(gt_bboxes_per_image, bboxes_preds_per_image, False)
 
         gt_cls_per_image = (
             F.one_hot(gt_classes.to(torch.int64), self.num_classes)
             .float()
-            .unsqueeze(1) # [num_gt, 1, 11]
+            .unsqueeze(1)
             .repeat(1, num_in_boxes_anchor, 1)
         )
         pair_wise_ious_loss = -torch.log(pair_wise_ious + 1e-8)
 
-        # if mode == "cpu":
-        #     cls_preds_, obj_preds_ = cls_preds_.cpu(), obj_preds_.cpu()
         cls_preds_ = cls_preds_.to(self.device)
         obj_preds_ = obj_preds_.to(self.device)
 
-        # with torch.cuda.amp.autocast(enabled=False):
-            # cls_preds : [fg_num, 11]
-            # obj_preds : [fg_num, 1]
+
         with torch.cuda.amp.autocast(enabled=False):
             cls_preds_ = (
                 cls_preds_.float().unsqueeze(0).repeat(num_gt, 1, 1).sigmoid_()
                 * obj_preds_.float().unsqueeze(0).repeat(num_gt, 1, 1).sigmoid_()
             )
-                # cls_preds_ : [num_gt, fg_num, 11]
-                # gt_cls_per_image : [num_gt, fg_num. 11]
+
             pair_wise_cls_loss = F.binary_cross_entropy(
                 cls_preds_.sqrt_(), gt_cls_per_image, reduction="none"
             ).sum(-1)
@@ -348,11 +321,7 @@ class RetrainUtils(nn.Module):
 
         del pair_wise_cls_loss, cost, pair_wise_ious, pair_wise_ious_loss
 
-        # if mode == "cpu":
-        #     gt_matched_classes = gt_matched_classes.cuda()
-        #     fg_mask = fg_mask.cuda()
-        #     pred_ious_this_matching = pred_ious_this_matching.cuda()
-        #     matched_gt_inds = matched_gt_inds.cuda()
+
         gt_matched_classes = gt_matched_classes.to(self.device)
         fg_mask = fg_mask.to(self.device)
         pred_ious_this_matching = pred_ious_this_matching.to(self.device)
@@ -377,7 +346,6 @@ class RetrainUtils(nn.Module):
     ):
         gt_bboxes_per_image = gt_bboxes_per_image.to(self.device)
         expanded_strides_per_image = expanded_strides[0].to(self.device)
-        # print(f"stride : {expanded_strides_per_image.get_device()}, x_shifts[0] : {x_shifts[0].get_device()}")
         x_shifts_per_image = x_shifts[0] * expanded_strides_per_image
         y_shifts_per_image = y_shifts[0]  * expanded_strides_per_image
         
@@ -413,24 +381,20 @@ class RetrainUtils(nn.Module):
             .repeat(1, total_num_anchors)
         )
 
-        # 각 grid의 center로 부터 거리인듯? -> 각 object와 각 grid의 center 간의 거리 [num_fg, num_anchors]
-        # print(f"x_centers_per_image : {x_centers_per_image.size()}, gt_bboxes_per_image_l : {gt_bboxes_per_image_l.size()}")
-        # print(f"x_centers : {x_centers_per_image.get_device()}, gt_bboxes : {gt_bboxes_per_image.get_device()}")
         b_l = x_centers_per_image - gt_bboxes_per_image_l 
         b_r = gt_bboxes_per_image_r - x_centers_per_image 
         b_t = y_centers_per_image - gt_bboxes_per_image_t
         b_b = gt_bboxes_per_image_b - y_centers_per_image
         bboxes_deltas = torch.stack([b_l, b_t, b_r, b_b], 2)
-        # [num_gt, 10710, 4] -> 각 object의 각 grid의 center(anchor)의 left, right, top, bottom 거리
 
-        is_in_boxes = bboxes_deltas.min(dim=-1).values > 0.0 # [num_gt, 10710]
-        is_in_boxes_all = is_in_boxes.sum(dim=0) > 0 # [10710], anchor가 모든 gt box들중 하나의 gt box안에라도 들어있는 애들 -> True else False
+        is_in_boxes = bboxes_deltas.min(dim=-1).values > 0.0
+        is_in_boxes_all = is_in_boxes.sum(dim=0) > 0 
 
         center_radius = 2.5
 
         gt_bboxes_per_image_l = (gt_bboxes_per_image[:, 0]).unsqueeze(1).repeat(
-            1, total_num_anchors # [num_gt, 10710]
-        ) - center_radius * expanded_strides_per_image.unsqueeze(0) # [1, 10710]
+            1, total_num_anchors 
+        ) - center_radius * expanded_strides_per_image.unsqueeze(0)
         gt_bboxes_per_image_r = (gt_bboxes_per_image[:, 0]).unsqueeze(1).repeat(
             1, total_num_anchors
         ) + center_radius * expanded_strides_per_image.unsqueeze(0)
@@ -448,8 +412,7 @@ class RetrainUtils(nn.Module):
         c_b = gt_bboxes_per_image_b - y_centers_per_image
         center_deltas = torch.stack([c_l, c_t, c_r, c_b], 2)
         is_in_centers = center_deltas.min(dim=-1).values > 0.0
-        is_in_centers_all = is_in_centers.sum(dim=0) > 0 # [10710], anchor가 모든 gt center box들중 하나의 gt center box안에라도 들어있는 애들 -> True else False
-
+        is_in_centers_all = is_in_centers.sum(dim=0) > 0
         is_in_boxes_anchor = is_in_boxes_all | is_in_centers_all
         is_in_boxes_and_center = (
             is_in_boxes[:, is_in_boxes_anchor] & is_in_centers[:, is_in_boxes_anchor]
@@ -457,13 +420,12 @@ class RetrainUtils(nn.Module):
         return is_in_boxes_anchor, is_in_boxes_and_center
     
     def dynamic_k_matching(self, cost, pair_wise_ious, gt_classes, num_gt, fg_mask):
-        # cost : [num_gt, fg_num], pair_wise_ious : [num_gt, fg_num], gt_classes : [num_gt], fg_mask : [10710]
         matching_matrix = torch.zeros_like(cost, dtype=torch.uint8)
 
-        ious_in_boxes_matrix = pair_wise_ious # [num_gt, fg_num]
-        n_candidate_k = min(10, ious_in_boxes_matrix.size(1)) # -> iou를 기반으로 k개를 고를떄 한 gt당 k개만 예측하자 이말인가?
-        topk_ious, _ = torch.topk(ious_in_boxes_matrix, n_candidate_k, dim=1) # [num_gt, n_candidate_k]
-        dynamic_ks = torch.clamp(topk_ious.sum(1).int(), min=1) # top-k개 고른 iou의 합을 기반으로 최종적으로 몇개의 cost를 가지고 계산할지 결정한다.?
+        ious_in_boxes_matrix = pair_wise_ious 
+        n_candidate_k = min(10, ious_in_boxes_matrix.size(1)) 
+        topk_ious, _ = torch.topk(ious_in_boxes_matrix, n_candidate_k, dim=1) 
+        dynamic_ks = torch.clamp(topk_ious.sum(1).int(), min=1) 
         dynamic_ks = dynamic_ks.tolist()
         for gt_idx in range(num_gt):
             _, pos_idx = torch.topk(
@@ -473,14 +435,14 @@ class RetrainUtils(nn.Module):
         
         del topk_ious, dynamic_ks, pos_idx
 
-        anchor_matching_gt = matching_matrix.sum(0) # 각 anchor마다 matching되는 gt의 갯수 [fg_num]
-        if (anchor_matching_gt > 1).sum() > 0: # gt와 1개 이상 matching되는 anchor가 1개 이상일때
-            _, cost_argmin = torch.min(cost[:, anchor_matching_gt > 1], dim=0) # matching되는 anchor중 gt와 cost가 가장 작은 gt의 idx를 고른다.
+        anchor_matching_gt = matching_matrix.sum(0) 
+        if (anchor_matching_gt > 1).sum() > 0:
+            _, cost_argmin = torch.min(cost[:, anchor_matching_gt > 1], dim=0)
             # cost_argmin : 
             matching_matrix[:, anchor_matching_gt > 1] *= 0
             matching_matrix[cost_argmin, anchor_matching_gt > 1] = 1
-        fg_mask_inboxes = matching_matrix.sum(0) > 0 # -> anchor중 위의 조건을 만족하는 gt와 매칭이되면 True else False [num_fg]
-        num_fg = fg_mask_inboxes.sum().item() # fg_mask_inboxes중 True의 갯수
+        fg_mask_inboxes = matching_matrix.sum(0) > 0 
+        num_fg = fg_mask_inboxes.sum().item()
 
         fg_mask[fg_mask.clone()] = fg_mask_inboxes
 
