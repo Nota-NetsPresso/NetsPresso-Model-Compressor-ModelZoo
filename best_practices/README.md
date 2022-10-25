@@ -29,9 +29,9 @@ Options: FP32,
 ### PASCAL VOC models
 |Model|Type|mAP (0.5) (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
 |:---:|:---:|:---|:---|:---|:---|:---|:---:|
-|YOLOv4|Original|82.22|61871.82|65.32|1324.42|256.74||
-|YOLOv4|Compressed-1|87.23 (+5.01)|11459.69 (5.4x)|8.42 (7.49x)|639.12 (2.16x)|43.09 (5.96x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/pascal_voc_models/YOLOv4.ipynb)|
-|YOLOv4|Compressed-2|87.91 (+5.69)|14437.96 (4.29x)|10.71 (6.1x)|631.90 (2.10x)|43.32 (5.93x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/pascal_voc_models/YOLOv4.ipynb)|
+|YOLOv4|Original|82.22|61871.82|65.32|1324.42|262.90||
+|YOLOv4|Compressed-1|87.23 (+5.01)|11459.69 (5.4x)|10.59 (6.17x)|639.12 (2.16x)|44.12 (5.96x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/pascal_voc_models/YOLOv4.ipynb)|
+|YOLOv4|Compressed-2|87.91 (+5.69)|14437.96 (4.29x)|10.71 (6.1x)|631.90 (2.10x)|44.36 (5.93x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/pascal_voc_models/YOLOv4.ipynb)|
 
 The model's latency is measured using a Intel Xeon CPU (2.00GHz x86_64).
 
