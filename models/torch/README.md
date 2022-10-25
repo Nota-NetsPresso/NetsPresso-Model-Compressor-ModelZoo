@@ -28,7 +28,7 @@
 
 ## Conversion of PyTorch into GraphModule (torch.fx.GraphModule)
 
-* ### Convert to GraphModule(example script)
+* ### Convert to GraphModule (example script)
 
 ```python
 import torch.fx
