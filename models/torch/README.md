@@ -24,7 +24,59 @@
     |:-----------------:|:---:|:-------:|:-------------:|
     | FCN_ResNet101 | Yes | Yes | 1.10.x        |
 
+
+
+## Conversion of PyTorch into GraphModule (torch.fx.GraphModule)
+
+* ### Convert to GraphModule(example script)
+
+```python
+import torch.fx
+from torchvision.models import resnet18, ResNet18_Weights
+
+model = resnet18(weights=ResNet18_Weights)
+graph = torch.fx.Tracer().trace(model)
+traced_model = torch.fx.GraphModule(model, graph)
+torch.save(traced_model, "resnet18.pt")
+```
+
+
+
+* ### Inference test of GraphModule
+
+```python
+import torch
+import torch.fx
+import numpy as np
+
+from torchvision.models import resnet18, ResNet18_Weights
+
+model = resnet18(weights=ResNet18_Weights)
+graph = torch.fx.Tracer().trace(model)
+traced_model = torch.fx.GraphModule(model, graph)
+
+# input size is needed to be choosen
+input_shape = (1, 3, 224, 224)
+random_input = torch.Tensor(np.random.randn(*input_shape))
+
+with torch.no_grad():
+    original_output = model(random_input)
+    traced_output = traced_model(random_input)
+
+assert torch.allclose(original_output, traced_output), "inference result is not equal!"
+```
+
+
+
+* ### fx Reference
+
+  - https://pytorch.org/docs/stable/fx.html
+
+
+
+
 ## Conversion of PyTorch into ONNX
+
 * ### Input shape of the model should be specified to convert to ONNX.
 * ### The ordering of the dimensions in the inputs is **(batch_size, channels, height, width)**.
 
@@ -88,3 +140,11 @@ input_tensor = torch.rand(torch.Size([1, 3, 224, 224]))
 dummy_output = simple_model(input_tensor)
 torch.onnx.export(simple_model, input_tensor, "simple_model.onnx", verbose=True, example_outputs=dummy_output, training=TrainingMode.TRAINING)
 ```
+
+
+
+
+
+## Q&A or Discussion
+
+https://github.com/Nota-NetsPresso/Discussion/discussions/categories/feedbacks-model-compressor
