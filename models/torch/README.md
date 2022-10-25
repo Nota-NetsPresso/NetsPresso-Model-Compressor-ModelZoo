@@ -1,4 +1,4 @@
-# Model Zoo for the NetsPresso Compression Toolkit
+# Model Zoo for the NetsPresso Model Compressor
 ## Provided Model Descriptions
 * ### ImageNet Pretrained Models - /models/torch/torchvision [(link)](https://pytorch.org/vision/0.8/models.html#classification)
   * Following models are now available on [NetsPresso Compression Toolkit](https://compression.netspresso.ai/).
