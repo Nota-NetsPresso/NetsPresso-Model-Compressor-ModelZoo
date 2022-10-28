@@ -26,7 +26,7 @@
 The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).
 Options: FP32, 
 
-### PASCAL VOC Object Detection models
+### PASCAL VOC models
 |Model|Type|mAP (0.5) (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
 |:---:|:---:|:---|:---|:---|:---|:---|:---:|
 |YOLOv4|Original|82.22|61871.82|65.32|1324.42|262.90||
@@ -54,7 +54,7 @@ The original CIFAR100 models are from [here](https://github.com/chenyaofo/pytorc
 |RepVGG|Compressed-1|74.80 (-1.64)|1637.71 (1.04x)|10.62 (1.22x)|113.35 (2.19x)|41.74 (1.22x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/torch/cifar100_models/RepVGG.ipynb)|
 |RepVGG|Compressed-2|70.19 (-6.25)|725.71 (2.36x)|3.00 (4.32x)|51.69 (4.80x)|11.62 (4.40x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/torch/cifar100_models/RepVGG.ipynb)|
 
-### COCO Object Detection models
+### COCO models
 |Model|Type|mAP (0.5:0.95) (%)|FLOPs (G)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
 |:---:|:---:|:---|:---|:---|:---|:---|:---:|
 |YOLOX|Original|49.7|156.01|54.21|12239.46|207.37||
