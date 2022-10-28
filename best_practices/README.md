@@ -26,7 +26,7 @@
 The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).
 Options: FP32, 
 
-### PASCAL VOC models
+### PASCAL VOC Object Detection models
 |Model|Type|mAP (0.5) (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
 |:---:|:---:|:---|:---|:---|:---|:---|:---:|
 |YOLOv4|Original|82.22|61871.82|65.32|1324.42|262.90||
