@@ -23,8 +23,8 @@
 |MobileNetV1|Compressed| 66.32 (-0.36)|26.09 (3.56x)| 0.53 (6.24x)|3.66 (9.73x)|2.38 (5.58x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/cifar100_models/MobileNetV1.ipynb)|
 |MobileNetV1|Compressed (Adv.)|66.11 (-0.57)|17.90 (5.19x)|0.35 (9.35x)|2.08 (17.12x)|3.3 (4.02x)||
 
-The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).
-Options: FP32, 
+The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).  
+Options: FP32, TFlite
 
 ### PASCAL VOC models
 |Model|Type|mAP (0.5) (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
