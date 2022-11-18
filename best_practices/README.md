@@ -10,7 +10,7 @@
 
 ## Classification
 ### TF-keras
-
+The original CIFAR100 models are from [here](https://github.com/Nota-NetsPresso/NetsPresso-Model-Compressor-ModelZoo/blob/main/models/tensorflow/cifar100.md). 
 |Model|Type|Dataset|Accuracy (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---:|
 |VGG19|Original|CIFAR100|72.28|796.79|20.09|189.31|78.69|
@@ -43,26 +43,26 @@ Options: FP32, TFlite
 ### TF-Keras
 |Model|Type|Dataset|mAP (0.5) (%)|mAP (0.5:0.95)(%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---|:---:|
-|YOLOv4|Original|PASCAL VOC|82.22|-|61871.82|65.32|1324.42|262.90||
+|[YOLOv4](https://github.com/david8862/keras-YOLOv3-model-set)|Original|PASCAL VOC|82.22|-|61871.82|65.32|1324.42|262.90||
 |YOLOv4|Compressed-1|PASCAL VOC|87.23 (+5.01)|-|11459.69 (5.4x)|10.59 (6.17x)|639.12 (2.16x)|44.12 (5.96x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/pascal_voc_models/YOLOv4.ipynb)|
 |YOLOv4|Compressed-2|PASCAL VOC|87.91 (+5.69)|-|14442.96 (4.28x)|10.71 (6.1x)|631.90 (2.10x)|44.36 (5.93x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/pascal_voc_models/YOLOv4.ipynb)|
 
 ＊YOLOv4 model with EfficientNet B1 based backbone.
 
 ### PyTorch
-|Model|Type|Dataset|mAP (0.5) (%)|mAP (0.5:0.95) (%)|FLOPs (G)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
+|Model|Type|Dataset|mAP (0.5) (%)|mAP (0.5:0.95) (%)|FLOPs <br>(M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---|:---:|
-|YOLOX|Original|COCO|68.0|49.7|156.01|54.21|12239.46|207.37||
-|YOLOX|Compressed-1|COCO|67.16 (-0.84)|48.64 (-1.06)|101.80 (1.53x)|19.96 (2.7x)|8502.72 (1.44x)|76.61 (2.7x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/torch/coco_models/YOLOX/YOLOX.ipynb)|
-|YOLOX|Compressed-2|COCO|61.43 (-6.57)|43.47 (-5.47)|38.61 (4.04x)|4.93 (11.0x)|4235.37 (2.89x)|19.17 (10.80x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/torch/coco_models/YOLOX/YOLOX.ipynb)|
+|[YOLOX](https://github.com/Megvii-BaseDetection/YOLOX)|Original|COCO|68.0|49.7|156006.20|54.21|12239.46|207.37||
+|YOLOX|Compressed-1|COCO|67.16 (-0.84)|48.64 (-1.06)|101804.06 (1.53x)|19.96 (2.7x)|8502.72 (1.44x)|76.61 (2.7x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/torch/coco_models/YOLOX/YOLOX.ipynb)|
+|YOLOX|Compressed-2|COCO|61.43 (-6.57)|43.47 (-5.47)|38607.03 (4.04x)|4.93 (11.0x)|4235.37 (2.89x)|19.17 (10.80x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/torch/coco_models/YOLOX/YOLOX.ipynb)|
 
 ## Semantic Segmentation
 ### PyTorch
 |Model|Type|Dataset|mIoU (%)|Global Correct (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---|:---:|
-|FCN ResNet50|Original|COCO|60.5|91.4|306554.91|13167.17|35.32|138.34||
-|FCN ResNet50|Compressed-1|COCO|60.4 (-0.1)|91.7 (+0.3)|222401.06 (x1.37)|25.41 (x1.39)|9640.07 (x1.37)|99.58||
-|FCN ResNet50|Compressed-2|COCO|59.5 (-1.0)|91.8 (+0.4)|134031.09 (x2.28)|14.96 (x2.36)|6333.09|58.75 (x.2.08)||
+|[FCN ResNet50](https://pytorch.org/vision/main/models/generated/torchvision.models.segmentation.fcn_resnet50.html)|Original|COCO|60.5|91.4|306554.91|35.32|13167.17|138.34||
+|FCN ResNet50|Compressed-1|COCO|60.4 (-0.1)|91.7 (+0.3)|222401.06 (1.37x)|25.41 (1.39x)|9640.07 (1.37x)|99.58(1.39x)||
+|FCN ResNet50|Compressed-2|COCO|59.5 (-1.0)|91.8 (+0.4)|134031.09 (x2.28)|14.96 (2.36x)|6333.09(2.08x)|58.75 (2.08x)||
 * We used a subset of COCO dataset to fine-tuning FCN ResNet50. You can check more details of dataset [here](https://pytorch.org/vision/main/models/generated/torchvision.models.segmentation.fcn_resnet50.html).
 
 The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).  
