@@ -11,7 +11,7 @@
 ## Classification
 ### TF-keras
 The original CIFAR100 models are from [here](https://github.com/Nota-NetsPresso/NetsPresso-Model-Compressor-ModelZoo/blob/main/models/tensorflow/cifar100.md). 
-|Model|Type|Dataset|Accuracy (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
+|Model|Type|Dataset|Accuracy<br> (%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model Size<br> (MB)|Best Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---:|
 |VGG19|Original|CIFAR100|72.28|796.79|20.09|189.31|78.69|
 |VGG19|Compressed|CIFAR100|71.13 (-1.15)|132.20 (6.03x)|1.17 (17.13x)|12.85 (14.73x)|4.98 (15.80x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/cifar100_models/VGG19.ipynb)|
@@ -25,7 +25,7 @@ The original CIFAR100 models are from [here](https://github.com/Nota-NetsPresso/
 
 ### PyTorch
 The original CIFAR100 models are from [here](https://github.com/chenyaofo/pytorch-cifar-models). 
-|Model|Type|Dataset|Accuracy (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
+|Model|Type|Dataset|Accuracy<br> (%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model Size<br> (MB)|Best Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---:|
 |VGG16|Original|CIFAR100|74.00|629.76|15.30|71.65|59.65|
 |VGG16|Compressed-1|CIFAR100|72.22 (-1.78)|431.84 (1.46x)|5.16 (2.96x)|24.52 (2.91x)|20.22 (2.95x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/torch/cifar100_models/VGG16.ipynb)|
@@ -41,7 +41,7 @@ Options: FP32, TFlite
 
 ## Object Detection
 ### TF-Keras
-|Model|Type|Dataset|mAP (0.5) (%)|mAP (0.5:0.95)(%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
+|Model|Type|Dataset|mAP<br> (0.5)<br> (%)|mAP<br> (0.5:0.95)(%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model Size<br> (MB)|Best Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---|:---:|
 |[YOLOv4](https://github.com/david8862/keras-YOLOv3-model-set)|Original|PASCAL VOC|82.22|-|61871.82|65.32|1324.42|262.90||
 |YOLOv4|Compressed-1|PASCAL VOC|87.23 (+5.01)|-|11459.69 (5.4x)|10.59 (6.17x)|639.12 (2.16x)|44.12 (5.96x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/pascal_voc_models/YOLOv4.ipynb)|
@@ -50,7 +50,7 @@ Options: FP32, TFlite
 ＊YOLOv4 model with EfficientNet B1 based backbone.
 
 ### PyTorch
-|Model|Type|Dataset|mAP (0.5) (%)|mAP (0.5:0.95) (%)|FLOPs <br>(M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
+|Model|Type|Dataset|mAP<br> (0.5)<br> (%)|mAP<br> (0.5:0.95)(%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model Size<br> (MB)|Best Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---|:---:|
 |[YOLOX](https://github.com/Megvii-BaseDetection/YOLOX)|Original|COCO|68.0|49.7|156006.20|54.21|12239.46|207.37||
 |YOLOX|Compressed-1|COCO|67.16 (-0.84)|48.64 (-1.06)|101804.06 (1.53x)|19.96 (2.7x)|8502.72 (1.44x)|76.61 (2.7x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/torch/coco_models/YOLOX/YOLOX.ipynb)|
@@ -58,7 +58,7 @@ Options: FP32, TFlite
 
 ## Semantic Segmentation
 ### PyTorch
-|Model|Type|Dataset|mIoU (%)|Global Correct (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
+|Model|Type|Dataset|mIoU<br> (%)|Global<br> Correct<br> (%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model<br> Size<br> (MB)|Best Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---|:---:|
 |[FCN ResNet50](https://pytorch.org/vision/main/models/generated/torchvision.models.segmentation.fcn_resnet50.html)|Original|COCO|60.5|91.4|306554.91|35.32|13167.17|138.34||
 |FCN ResNet50|Compressed-1|COCO|60.4 (-0.1)|91.7 (+0.3)|222401.06 (1.37x)|25.41 (1.39x)|9640.07 (1.37x)|99.58(1.39x)||
