@@ -1,7 +1,7 @@
 ## Compressed Results of [CIFAR-100](https://www.cs.toronto.edu/~kriz/cifar.html)
 
-<!-- We provide the compressed results of following models in the [Best Practices](https://github.com/Nota-NetsPresso/NetsPresso-Model-Compressor-ModelZoo/tree/main/best_practices#cifar100-models-1). -->
-|Model|Type|Accuracy (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|
+We provide the compressed results of following models in the [Best Practices](https://github.com/Nota-NetsPresso/NetsPresso-Model-Compressor-ModelZoo/tree/main/best_practices#cifar100-models-1).
+<!-- |Model|Type|Accuracy (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|
 |:---:|:---:|:---|:---|:---|:---|:---|
 |VGG16|Original|74.00|629.20|15.30|71.65|59.91|
 |VGG16|Compressed-1|71.89 (-2.11)|433.00 (1.45x)|5.16 (2.97x)|24.52 (2.91x)|20.19 (2.97x)|
@@ -10,7 +10,7 @@
 |MobileNetV2|Compressed|73.42 (-0.87)|111.96 (1.60x)|0.79 (2.96x)|24.50 (1.89x)|3.33 (2.81x)|
 |RepVGG|Original|76.44|1709.31|12.94|248.10|51.09|
 |RepVGG|Compressed-1|74.80 (-1.64)|1637.71 (1.04x)|10.62 (1.22x)|113.35 (2.19x)|41.74 (1.22x)|
-|RepVGG|Compressed-2|70.19 (-6.25)|725.71 (2.36x)|3.00 (4.32x)|51.69 (4.80x)|11.62 (4.40x)|
+|RepVGG|Compressed-2|70.19 (-6.25)|725.71 (2.36x)|3.00 (4.32x)|51.69 (4.80x)|11.62 (4.40x)| -->
 
 
 ### Pre-trained Models(onnx)

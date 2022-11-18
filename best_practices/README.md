@@ -47,6 +47,8 @@ Options: FP32, TFlite
 |YOLOv4|Compressed-1|PASCAL VOC|87.23 (+5.01)|-|11459.69 (5.4x)|10.59 (6.17x)|639.12 (2.16x)|44.12 (5.96x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/pascal_voc_models/YOLOv4.ipynb)|
 |YOLOv4|Compressed-2|PASCAL VOC|87.91 (+5.69)|-|14442.96 (4.28x)|10.71 (6.1x)|631.90 (2.10x)|44.36 (5.93x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/tensorflow/pascal_voc_models/YOLOv4.ipynb)|
 
+＊YOLOv4 model with EfficientNet B1 based backbone.
+
 ### PyTorch
 |Model|Type|Dataset|mAP (0.5) (%)|mAP (0.5:0.95) (%)|FLOPs (G)|Params (M)|Latency (ms)|Model Size (MB)|Best Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---|:---:|
