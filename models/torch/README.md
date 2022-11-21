@@ -68,6 +68,15 @@ assert torch.allclose(original_output, traced_output), "inference result is not 
 
 
 
+* ### Load GraphModule
+```python
+import torch
+
+model = torch.load("resnet18.pt")
+
+```
+
+
 * ### fx Reference
 
   - https://pytorch.org/docs/stable/fx.html
