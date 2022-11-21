@@ -1,4 +1,4 @@
-## Compressed Results of [CIFAR-100](https://www.cs.toronto.edu/~kriz/cifar.html)
+## Compressed Results of [COCO](https://cocodataset.org/#home) Object Detection Models
 
 We provide the compressed results of following models in the [Best Practices](https://github.com/Nota-NetsPresso/NetsPresso-Model-Compressor-ModelZoo/tree/main/best_practices#cifar100-models-1).
 
