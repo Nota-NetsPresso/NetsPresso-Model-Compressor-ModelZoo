@@ -7,7 +7,7 @@
 |   Original    |     82.22     |     61871.82     |     65.32     |     262.90      | [Link](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/keras/pascal_voc/yolov4_efficientnetb1_original.h5) |
 | NPTK-Simple 1 | 87.23 (+5.01) | 11459.69 (5.4x)  | 10.59 (6.17x) |  44.12 (5.96x)  | [Link](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/keras/pascal_voc/yolov4_efficientnetb1_fd_p.h5) |
 | NPTK-Simple 2 | 87.91 (+5.69) | 14442.96 (4.28x) | 10.71 (6.1x)  |  44.36 (5.93x)  | [Link](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/keras/pascal_voc/yolov4_efficientnetb1_p.h5) | -->
-We provide the compressed results of following models in the [Best Practices](https://github.com/Nota-NetsPresso/NetsPresso-Model-Compressor-ModelZoo/tree/main/best_practices#cifar100-models-1).
+We provide the compressed result of YOLOv4 in the [Best Practices](https://github.com/Nota-NetsPresso/NetsPresso-Model-Compressor-ModelZoo/tree/main/best_practices#cifar100-models-1).
 
 
 ## 2. Original Model
