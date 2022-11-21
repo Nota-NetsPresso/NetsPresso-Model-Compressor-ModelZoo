@@ -1,6 +1,6 @@
 ## Compressed Results of [CIFAR-100](https://www.cs.toronto.edu/~kriz/cifar.html)
 
-We provide the compressed results of following models in the [Best Practices](https://github.com/Nota-NetsPresso/NetsPresso-Model-Compressor-ModelZoo/tree/main/best_practices#cifar100-models-1).
+We provide the compressed results of following models in the [Best Practices](https://github.com/Nota-NetsPresso/NetsPresso-Model-Compressor-ModelZoo/tree/main/best_practices#pytorch).
 <!-- |Model|Type|Accuracy (%)|FLOPs (M)|Params (M)|Latency (ms)|Model Size (MB)|
 |:---:|:---:|:---|:---|:---|:---|:---|
 |VGG16|Original|74.00|629.20|15.30|71.65|59.91|
