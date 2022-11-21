@@ -27,6 +27,9 @@ The original CIFAR100 models are from [here](https://github.com/Nota-NetsPresso/
 |MobileNetV1|Compressed|CIFAR100| 66.32 (-0.36)|26.09 (3.56x)| 0.53 (6.24x)|3.66 (9.73x)|2.38 (5.58x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices//classification/tf_keras/mobilenetv1_cifar100.ipynb)|
 |MobileNetV1|Compressed (Adv.)|CIFAR100|66.11 (-0.57)|17.90 (5.19x)|0.35 (9.35x)|2.08 (17.12x)|3.3 (4.02x)||
 
+The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).  
+Options: FP32, TFlite
+
 ### PyTorch
 The original CIFAR100 models are from [here](https://github.com/chenyaofo/pytorch-cifar-models). 
 |Model|Type|Dataset|Accuracy<br> (%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model Size<br> (MB)|Best<br> Practice|
@@ -41,17 +44,20 @@ The original CIFAR100 models are from [here](https://github.com/chenyaofo/pytorc
 |RepVGG|Compressed-2|CIFAR100|69.84 (-4.60)|721.77 (2.38x)|2.95 (4.39x)|51.69 (4.80x)|11.71 (4.30x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/classification/torch/repvgg_cifar100.ipynb)|
 
 The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).  
-Options: FP32, TFlite
+Options: FP32, ONNX runtime
 
 ## Object Detection
 ### TF-Keras
 |Model|Type|Dataset|mAP<br> (0.5)<br> (%)|mAP<br> (0.5:0.95)(%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model Size<br> (MB)|Best Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---|:---:|
-|[YOLOv4](https://github.com/david8862/keras-YOLOv3-model-set)|Original|PASCAL VOC|82.22|-|61871.82|65.32|1324.42|262.90||
-|YOLOv4|Compressed-1|PASCAL VOC|87.23 (+5.01)|-|11459.69 (5.4x)|10.59 (6.17x)|639.12 (2.16x)|44.12 (5.96x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/object_detection/tf_keras/yolov4_voc.ipynb)|
-|YOLOv4|Compressed-2|PASCAL VOC|87.91 (+5.69)|-|14442.96 (4.28x)|10.71 (6.1x)|631.90 (2.10x)|44.36 (5.93x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/object_detection/tf_keras/yolov4_voc.ipynb)|
+|[YOLOv4](https://github.com/david8862/keras-YOLOv3-model-set)|Original|PASCAL VOC|82.22|-|61871.82|65.32|64318.70|262.90||
+|YOLOv4|Compressed-1|PASCAL VOC|87.23 (+5.01)|-|11459.69 (5.4x)|10.59 (6.17x)|28651.70 (2.16x)|44.12 (5.96x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/object_detection/tf_keras/yolov4_voc.ipynb)|
+|YOLOv4|Compressed-2|PASCAL VOC|87.91 (+5.69)|-|14442.96 (4.28x)|10.71 (6.1x)|28976.40 (2.14x)|44.36 (5.93x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/object_detection/tf_keras/yolov4_voc.ipynb)|
 
 ＊YOLOv4 model with EfficientNet B1 based backbone.
+
+The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).  
+Options: FP32, TFlite
 
 ### PyTorch
 |Model|Type|Dataset|mAP<br> (0.5)<br> (%)|mAP<br> (0.5:0.95)(%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model Size<br> (MB)|Best Practice|
@@ -59,6 +65,9 @@ Options: FP32, TFlite
 |[YOLOX](https://github.com/Megvii-BaseDetection/YOLOX)|Original|COCO|68.0|49.7|156006.20|54.21|12239.46|207.37||
 |YOLOX|Compressed-1|COCO|67.16 (-0.84)|48.64 (-1.06)|101804.06 (1.53x)|19.96 (2.7x)|8502.72 (1.44x)|76.61 (2.7x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/object_detection/torch/yolox_coco/YOLOX.ipynb)|
 |YOLOX|Compressed-2|COCO|61.43 (-6.57)|43.47 (-5.47)|38607.03 (4.04x)|4.93 (11.0x)|4235.37 (2.89x)|19.17 (10.80x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/object_detection/torch/yolox_coco/YOLOX.ipynb)|
+
+The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).  
+Options: FP32, ONNX runtime
 
 ## Semantic Segmentation
 ### PyTorch
