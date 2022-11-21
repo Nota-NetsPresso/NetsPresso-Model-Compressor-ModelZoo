@@ -60,9 +60,9 @@ Options: FP32, TFlite
 ### PyTorch
 |Model|Type|Dataset|mIoU<br> (%)|Global<br> Correct<br> (%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model<br> Size<br> (MB)|Best Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---|:---:|
-|[FCN ResNet50](https://pytorch.org/vision/main/models/generated/torchvision.models.segmentation.fcn_resnet50.html)|Original|COCO|60.5|91.4|306554.91|35.32|13167.17|138.34||
-|FCN ResNet50|Compressed-1|COCO|60.4 (-0.1)|91.7 (+0.3)|222401.06 (1.37x)|25.41 (1.39x)|9640.07 (1.37x)|99.58(1.39x)||
-|FCN ResNet50|Compressed-2|COCO|59.5 (-1.0)|91.8 (+0.4)|134031.09 (x2.28)|14.96 (2.36x)|6333.09 (2.08x)|58.75 (2.08x)||
+|[FCN ResNet50](https://pytorch.org/vision/main/models/generated/torchvision.models.segmentation.fcn_resnet50.html)|Original|COCO|60.5|91.4|306554.91|35.32|13167.17|138.34|WIP|
+|FCN ResNet50|Compressed-1|COCO|60.4 (-0.1)|91.7 (+0.3)|222401.06 (1.37x)|25.41 (1.39x)|9640.07 (1.37x)|99.58(1.39x)|WIP|
+|FCN ResNet50|Compressed-2|COCO|59.5 (-1.0)|91.8 (+0.4)|134031.09 (x2.28)|14.96 (2.36x)|6333.09 (2.08x)|58.75 (2.08x)|WIP|
 * We used a subset of COCO dataset to fine-tuning FCN ResNet50. You can check more details of dataset [here](https://pytorch.org/vision/main/models/generated/torchvision.models.segmentation.fcn_resnet50.html).
 
 The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).  
