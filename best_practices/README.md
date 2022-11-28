@@ -40,7 +40,7 @@ The original CIFAR100 models are from [here](https://github.com/chenyaofo/pytorc
 |MobileNetV2|Original|CIFAR100|74.29|189.30|2.35|46.26|8.98|
 |MobileNetV2|Compressed|CIFAR100|73.68 (-0.61)|111.10 (1.59x)|0.82 (2.88x)|24.50 (1.89x)|3.38 (2.66x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/classification/torch/mobilenetv2_cifar100.ipynb)|
 |RepVGG|Original|CIFAR100|76.44|1715.70|12.94|248.10|50.33|
-|RepVGG|Compressed-1|CIFAR100|74.92 (-1.52)|16344.88 (1.04x)|10.64 (1.22x)|113.35 (2.19x)|41.81 (1.20x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/classification/torch/repvgg_cifar100.ipynb)|
+|RepVGG|Compressed-1|CIFAR100|74.92 (-1.52)|1644.88 (1.04x)|10.64 (1.22x)|113.35 (2.19x)|41.81 (1.20x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/classification/torch/repvgg_cifar100.ipynb)|
 |RepVGG|Compressed-2|CIFAR100|69.84 (-4.60)|721.77 (2.38x)|2.95 (4.39x)|51.69 (4.80x)|11.71 (4.30x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/classification/torch/repvgg_cifar100.ipynb)|
 
 The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).  
