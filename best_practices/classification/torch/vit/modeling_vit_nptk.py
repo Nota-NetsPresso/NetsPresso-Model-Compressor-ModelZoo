@@ -173,16 +173,20 @@ class ViTPatchEmbeddings(nn.Module):
 
     def forward(self, pixel_values: torch.Tensor, interpolate_pos_encoding: bool = False) -> torch.Tensor:
         batch_size, num_channels, height, width = pixel_values.shape
-        if num_channels != self.num_channels:
-            raise ValueError(
-                "Make sure that the channel dimension of the pixel values match with the one set in the configuration."
-            )
-        if not interpolate_pos_encoding:
-            if height != self.image_size[0] or width != self.image_size[1]:
-                raise ValueError(
+        torch._assert(num_channels == self.num_channels,
+            "Make sure that the channel dimension of the pixel values match with the one set in the configuration."
+        )
+        
+        torch._assert(height == self.image_size[0],
                     f"Input image size ({height}*{width}) doesn't match model"
                     f" ({self.image_size[0]}*{self.image_size[1]})."
-                )
+        )
+
+        torch._assert(width == self.image_size[1],
+                    f"Input image size ({height}*{width}) doesn't match model"
+                    f" ({self.image_size[0]}*{self.image_size[1]})."
+        )
+
         embeddings = self.projection(pixel_values).flatten(2).transpose(1, 2)
         return embeddings
 
@@ -748,7 +752,7 @@ class ViTForMaskedImageModeling(ViTPreTrainedModel):
     """,
     VIT_START_DOCSTRING,
 )
-class ViTForImageClassification(ViTPreTrainedModel):
+class ViTForImageClassificationNptk(ViTPreTrainedModel):
     def __init__(self, config: ViTConfig) -> None:
         super().__init__(config)
 
@@ -789,14 +793,10 @@ class ViTForImageClassification(ViTPreTrainedModel):
 
         outputs = self.vit(
             pixel_values,
-            head_mask=head_mask,
-            output_attentions=output_attentions,
-            output_hidden_states=output_hidden_states,
-            interpolate_pos_encoding=interpolate_pos_encoding,
-            return_dict=return_dict,
+            
         )
 
-        sequence_output = outputs[0]
+        sequence_output = outputs["last_hidden_state"]
 
         logits = self.classifier(sequence_output[:, 0, :])
 
@@ -830,6 +830,5 @@ class ViTForImageClassification(ViTPreTrainedModel):
         return ImageClassifierOutput(
             loss=loss,
             logits=logits,
-            hidden_states=outputs.hidden_states,
-            attentions=outputs.attentions,
+            hidden_states=outputs["last_hidden_state"],
         )
