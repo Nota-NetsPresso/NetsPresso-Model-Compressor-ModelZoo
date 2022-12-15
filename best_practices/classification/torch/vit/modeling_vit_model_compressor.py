@@ -752,7 +752,7 @@ class ViTForMaskedImageModeling(ViTPreTrainedModel):
     """,
     VIT_START_DOCSTRING,
 )
-class ViTForImageClassificationNptk(ViTPreTrainedModel):
+class ViTForImageClassificationModelCompressor(ViTPreTrainedModel):
     def __init__(self, config: ViTConfig) -> None:
         super().__init__(config)
 
