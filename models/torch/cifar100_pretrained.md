@@ -13,15 +13,19 @@ We provide the compressed results of following models in the [Best Practices](ht
 |RepVGG|Compressed-2|70.19 (-6.25)|725.71 (2.36x)|3.00 (4.32x)|51.69 (4.80x)|11.62 (4.40x)| -->
 
 
-### Pre-trained Models(onnx)
-
-- [cifar100-mobilenetv2.onnx](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_mobilenetv2_x1_0.onnx)
-- [cifar100-repvgg-a1.onnx](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_repvgg_a1.onnx)
-- [cifar100-vgg16-bn.onnx](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_vgg16_bn.onnx)
-
+### Pre-trained Models
+* ONNX
+  - [cifar100-mobilenetv2.onnx](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_mobilenetv2_x1_0.onnx)
+  - [cifar100-repvgg-a1.onnx](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_repvgg_a1.onnx)
+  - [cifar100-vgg16-bn.onnx](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_vgg16_bn.onnx)
+<!-- * GraphModule
+  - ViT
+    - [cifar100-model_vit.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/vit/model_vit.pt)
+    - [cifar100-model.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/vit/model.pt) -->
 ### Compressed Models(pt)
 - [VGG16_compressed1.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/compressed/VGG16_compressed1.pt)
 - [VGG16_compressed2.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/compressed/VGG16_compressed2.pt)
 - [MobileNetV2_compressed.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/compressed/MobileNetV2_compressed.pt)
 - [RepVGG_compressed1.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/compressed/RepVGG_compressed1.pt)
 - [RepVGG_compressed2.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/compressed/RepVGG_compressed2.pt)
+<!-- - [model_vit_compressed.pt]() -->
