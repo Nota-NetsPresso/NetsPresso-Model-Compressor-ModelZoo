@@ -18,7 +18,7 @@ We provide the compressed result of YOLOv4 in the [Best Practices](https://githu
 
 ## 3. Model Compression
 
-- ### NPTK-Simple 1
+- ### Compressed-1
 
   - #### Stage 1: Filter Decomposition (Tucker Decomposition)
 
@@ -31,7 +31,7 @@ We provide the compressed result of YOLOv4 in the [Best Practices](https://githu
       - Except : block1a_se_reduce ~ block7b_add, top_conv, conv2d_36_tucker_2, conv2d_28_tucker_2 , conv2d_20_tucker_2
 
 
-- ### NPTK-Simple 2
+- ### Compressed-2
 
   - #### Stage 1: Pruning (L2 Norm)
 

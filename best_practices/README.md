@@ -15,7 +15,7 @@ Please notice to the manager when you change the contents of the tables.
 ## Classification
 ### TF-Keras
 The original CIFAR100 models are from [here](https://github.com/Nota-NetsPresso/NetsPresso-Model-Compressor-ModelZoo/blob/main/models/tensorflow/cifar100.md). 
-|Model|Type|Dataset|Accuracy<br> (%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model Size<br> (MB)|Best<br> Practice|
+|Model|Type|Dataset|Top-1 Accuracy<br> (%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model Size<br> (MB)|Best<br> Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---:|
 |VGG19|Original|CIFAR100|72.28|796.79|20.09|189.31|78.69|
 |VGG19|Compressed|CIFAR100|71.13 (-1.15)|132.20 (6.03x)|1.17 (17.13x)|12.85 (14.73x)|4.98 (15.80x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/classification/tf_keras/vgg19_cifar100.ipynb)|
@@ -32,7 +32,7 @@ Options: FP32, TFlite
 
 ### PyTorch
 The original CIFAR100 models are from [here](https://github.com/chenyaofo/pytorch-cifar-models). 
-|Model|Type|Dataset|Accuracy<br> (%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model Size<br> (MB)|Best<br> Practice|
+|Model|Type|Dataset|Top-1 Accuracy<br> (%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model Size<br> (MB)|Best<br> Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---:|
 |VGG16|Original|CIFAR100|74.00|629.76|15.30|71.65|59.65|
 |VGG16|Compressed-1|CIFAR100|72.22 (-1.78)|431.84 (1.46x)|5.16 (2.96x)|24.52 (2.91x)|20.22 (2.95x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/classification/torch/vgg16_cifar100.ipynb)|
