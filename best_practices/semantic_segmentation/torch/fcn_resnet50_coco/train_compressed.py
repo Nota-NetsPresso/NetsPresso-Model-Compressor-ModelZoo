@@ -232,7 +232,7 @@ def main(args):
         ]
         if args.aux_loss:
             params_to_optimize.append({"params":aux_classifier, "lr":args.lr*10})
-            
+
     optimizer = torch.optim.SGD(params_to_optimize, lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
 
     scaler = torch.cuda.amp.GradScaler() if args.amp else None
@@ -282,6 +282,7 @@ def main(args):
         return
 
     start_time = time.time()
+    best_IoU = 0
     for epoch in range(args.start_epoch, args.epochs):
         if args.distributed:
             train_sampler.set_epoch(epoch)
@@ -299,7 +300,12 @@ def main(args):
             checkpoint["scaler"] = scaler.state_dict()
         utils.save_on_master(checkpoint, os.path.join(args.output_dir, f"model_{epoch}.pth"))
         utils.save_on_master(checkpoint, os.path.join(args.output_dir, "checkpoint.pth"))
-
+        
+        acc_global, acc, iu = confmat.compute()
+        now_IoU = sum(iu)/len(iu)
+        if utils.is_main_process() and best_IoU < now_IoU:
+            best_IoU = now_IoU
+            torch.save(model_without_ddp,os.path.join(args.output_dir,f"best_graphmodule.pt"))
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))
     print(f"Training time {total_time_str}")
