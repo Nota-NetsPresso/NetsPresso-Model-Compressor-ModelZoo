@@ -213,13 +213,26 @@ def main(args):
         model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.gpu])
         model_without_ddp = model.module
 
-    params_to_optimize = [
-        {"params": [p for p in model_without_ddp.backbone.parameters() if p.requires_grad]},
-        {"params": [p for p in model_without_ddp.classifier.parameters() if p.requires_grad]},
-    ]
-    if args.aux_loss:
-        params = [p for p in model_without_ddp.aux_classifier.parameters() if p.requires_grad]
-        params_to_optimize.append({"params": params, "lr": args.lr * 10})
+        backbone = []
+        classifier = []
+        aux_classifier = []
+        for name, params in model_without_ddp.named_parameters():
+            if 'backbone' in name:
+                if params.requires_grad:
+                    backbone.append(params)
+            elif 'aux' in name:
+                if params.requires_grad:
+                    aux_classifier.append(params)
+            elif 'classifier' in name:
+                if params.requires_grad:
+                    classifier.append(params)
+        params_to_optimize = [
+            {"params": backbone},
+            {"params": classifier},
+        ]
+        if args.aux_loss:
+            params_to_optimize.append({"params":aux_classifier, "lr":args.lr*10})
+            
     optimizer = torch.optim.SGD(params_to_optimize, lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
 
     scaler = torch.cuda.amp.GradScaler() if args.amp else None
