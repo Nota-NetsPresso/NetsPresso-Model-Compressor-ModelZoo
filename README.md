@@ -25,5 +25,5 @@
 
 
 ## Model Download Links
-You can download models [**Here**](models/README.md)
+You can download models [**Here**](models).
 
