@@ -31,19 +31,20 @@ The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).
 Options: FP32, TFlite
 
 ### PyTorch
-The original CIFAR100 models are from [here](https://github.com/chenyaofo/pytorch-cifar-models). 
 |Model|Type|Dataset|Top-1 Accuracy<br> (%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model Size<br> (MB)|Best<br> Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---:|
 |VGG16|Original|CIFAR100|74.00|629.76|15.30|71.65|59.65|
 |VGG16|Compressed-1|CIFAR100|72.22 (-1.78)|431.84 (1.46x)|5.16 (2.96x)|24.52 (2.91x)|20.22 (2.95x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/classification/torch/vgg16_cifar100.ipynb)|
 |VGG16|Compressed-2|CIFAR100|68.01 (-5.99)|213.06 (2.96x)|1.25 (12.26x)|11.34 (6.32x)|4.93 (12.10x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/classification/torch/vgg16_cifar100.ipynb)|
 |MobileNetV2|Original|CIFAR100|74.29|189.30|2.35|46.26|8.98|
-|MobileNetV2|Compressed|CIFAR100|73.68 (-0.61)|111.10 (1.59x)|0.82 (2.88x)|24.50 (1.89x)|3.38 (2.66x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/classification/torch/mobilenetv2_cifar100.ipynb)|
+|MobileNetV2|Compressed|CIFAR100|73.68 (-0.61)|119.09 (1.59x)|0.82 (2.88x)|24.50 (1.89x)|3.38 (2.66x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/classification/torch/mobilenetv2_cifar100.ipynb)|
 |RepVGG|Original|CIFAR100|76.44|1715.70|12.94|248.10|50.33|
 |RepVGG|Compressed-1|CIFAR100|74.92 (-1.52)|1644.88 (1.04x)|10.64 (1.22x)|113.35 (2.19x)|41.81 (1.20x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/classification/torch/repvgg_cifar100.ipynb)|
 |RepVGG|Compressed-2|CIFAR100|69.84 (-4.60)|721.77 (2.38x)|2.95 (4.39x)|51.69 (4.80x)|11.71 (4.30x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/classification/torch/repvgg_cifar100.ipynb)|
 |ViT|Original|CIFAR100|94.42|33725.76|85.80|1396.53|327.43||
 |ViT|Compressed|CIFAR100|93.30 (-1.12)|14804.95 (2.28x)|37.78 (2.27x)|737.11 (1.89x)|144.32 (2.27x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/classification/torch/vit/vit_cifar100.ipynb)|
+
+The original CIFAR100 models are from [here](https://github.com/chenyaofo/pytorch-cifar-models). 
 
 The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).  
 Options: FP32, ONNX runtime
