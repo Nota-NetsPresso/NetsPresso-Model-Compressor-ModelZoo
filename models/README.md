@@ -7,4 +7,5 @@
 - [torch](torch/README.md)
   - [cifar100_pretrained](torch/cifar100_pretrained.md)
   - [torchvision_models](torch/torchvision_models.md)
+  - [coco](torch/coco_models.md)
 

@@ -18,10 +18,14 @@ We provide the compressed results of following models in the [Best Practices](ht
   - [cifar100-mobilenetv2.onnx](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_mobilenetv2_x1_0.onnx)
   - [cifar100-repvgg-a1.onnx](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_repvgg_a1.onnx)
   - [cifar100-vgg16-bn.onnx](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_vgg16_bn.onnx)
-<!-- * GraphModule
+* GraphModule
+  - [cifar100-mobilenetv2.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_mobilenetv2_x1_0.pt)
+  - [cifar100-repvgg-a1.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_repvgg_a1.pt)
+  - [cifar100-vgg16-bn.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/cifar100_vgg16_bn.pt)
   - ViT
     - [cifar100-model_vit.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/vit/model_vit.pt)
-    - [cifar100-model.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/vit/model.pt) -->
+    - [cifar100-model.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/pretrained/vit/model.pt)
+
 ### Compressed Models(pt)
 - [VGG16_compressed1.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/compressed/VGG16_compressed1.pt)
 - [VGG16_compressed2.pt](https://netspresso-compression-toolkit-public.s3.ap-northeast-2.amazonaws.com/model_zoo/torch/cifar100/compressed/VGG16_compressed2.pt)
