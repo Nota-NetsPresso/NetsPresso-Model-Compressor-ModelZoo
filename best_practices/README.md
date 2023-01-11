@@ -76,7 +76,7 @@ Options: FP32, ONNX runtime
 ### PyTorch
 |Model|Type|Dataset|mIoU<br> (%)|Global<br> Correct<br> (%)|FLOPs<br> (M)|Params<br> (M)|Latency<br> (ms)|Model<br> Size<br> (MB)|Best Practice|
 |:---:|:---:|:---:|:---|:---|:---|:---|:---|:---|:---:|
-|[FCN ResNet50](https://pytorch.org/vision/main/models/generated/torchvision.models.segmentation.fcn_resnet50.html)|Original|COCO|60.5|91.4|306554.91|35.32|13167.17|138.34||
+|[FCN ResNet50](https://pytorch.org/vision/main/models/generated/torchvision.models.segmentation.fcn_resnet50.html)|Original|COCO|60.5|91.4|306554.91|35.32|13167.17|135.09||
 |FCN ResNet50|Compressed-1|COCO|59.6 (-0.9)|91.4 (-0.0)|156106.03 (1.96x)|17.58 (2.01x)|6438.06 (2.04x)|67.34 (2.01x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-Model-Compressor-ModelZoo/blob/main/best_practices/semantic_segmentation/torch/fcn_resnet50_coco/fcn_resnet50.ipynb)|
 |FCN ResNet50|Compressed-2|COCO|54.7 (-5.8)|90.7 (-0.7)|45826.66 (x6.68)|4.84 (7.31x)|2147.92 (6.13x)|18.70 (7.22x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-Model-Compressor-ModelZoo/blob/main/best_practices/semantic_segmentation/torch/fcn_resnet50_coco/fcn_resnet50.ipynb)|
 * We used a subset of COCO dataset to fine-tuning FCN ResNet50. You can check more details of dataset [here](https://pytorch.org/vision/main/models/generated/torchvision.models.segmentation.fcn_resnet50.html).
