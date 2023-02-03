@@ -21,9 +21,9 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
-import test_npmc as test  # import test.py to get mAP after each epoch
-from models.experimental import attempt_load, attempt_load_npmc
-from models.yolo import Model, detectConfig
+import test  # import test.py to get mAP after each epoch
+from models.experimental import attempt_load
+from models.yolo import Model
 from utils.autoanchor import check_anchors
 from utils.datasets import create_dataloader
 from utils.general import labels_to_class_weights, increment_path, labels_to_image_weights, init_seeds, \
@@ -80,10 +80,19 @@ def train(hyp, opt, device, tb_writer=None):
     assert len(names) == nc, '%g names found for nc=%g dataset in %s' % (len(names), nc, opt.data)  # check
 
     # Model
-
-    model = attempt_load_npmc(weights=opt.weight, load_mode='train',
-                              graphmodule=opt.graphmodule, fuse=False, map_location=device)
-    model.to(device)
+    pretrained = weights.endswith('.pt')
+    if pretrained:
+        with torch_distributed_zero_first(rank):
+            attempt_download(weights)  # download if not found locally
+        ckpt = torch.load(weights, map_location=device)  # load checkpoint
+        model = Model(opt.cfg or ckpt['model'].yaml, ch=3, nc=nc, anchors=hyp.get('anchors')).to(device)  # create
+        exclude = ['anchor'] if (opt.cfg or hyp.get('anchors')) and not opt.resume else []  # exclude keys
+        state_dict = ckpt['model'].float().state_dict()  # to FP32
+        state_dict = intersect_dicts(state_dict, model.state_dict(), exclude=exclude)  # intersect
+        model.load_state_dict(state_dict, strict=False)  # load
+        logger.info('Transferred %g/%g items from %s' % (len(state_dict), len(model.state_dict()), weights))  # report
+    else:
+        model = Model(opt.cfg, ch=3, nc=nc, anchors=hyp.get('anchors')).to(device)  # create
     with torch_distributed_zero_first(rank):
         check_dataset(data_dict)  # check
     train_path = data_dict['train']
@@ -114,12 +123,6 @@ def train(hyp, opt, device, tb_writer=None):
         if hasattr(v, 'im'):
             if hasattr(v.im, 'implicit'):           
                 pg0.append(v.im.implicit)
-            elif opt.graphmodule:
-                for vk,vm in v.im._modules.items():
-                    if hasattr(vm, 'implicit_'):
-                        pg0.append(getattr(vm,'implicit_'))
-                    elif hasattr(vm, 'implicit'):
-                        pg0.append(getattr(vm,'implicit'))
             else:
                 for iv in v.im:
                     pg0.append(iv.implicit)
@@ -144,12 +147,6 @@ def train(hyp, opt, device, tb_writer=None):
         if hasattr(v, 'ia'):
             if hasattr(v.ia, 'implicit'):           
                 pg0.append(v.ia.implicit)
-            elif opt.graphmodule:
-                for vk,va in v.ia._modules.items():
-                    if hasattr(va,'implicit_'):
-                        pg0.append(getattr(va,'implicit_'))
-                    elif hasattr(va,'implicit'):
-                        pg0.append(getattr(va,'implicit'))   
             else:
                 for iv in v.ia:
                     pg0.append(iv.implicit)
@@ -204,6 +201,31 @@ def train(hyp, opt, device, tb_writer=None):
 
     # Resume
     start_epoch, best_fitness = 0, 0.0
+    if pretrained:
+        # Optimizer
+        if ckpt['optimizer'] is not None:
+            optimizer.load_state_dict(ckpt['optimizer'])
+            best_fitness = ckpt['best_fitness']
+
+        # EMA
+        if ema and ckpt.get('ema'):
+            ema.ema.load_state_dict(ckpt['ema'].float().state_dict())
+            ema.updates = ckpt['updates']
+
+        # Results
+        if ckpt.get('training_results') is not None:
+            results_file.write_text(ckpt['training_results'])  # write results.txt
+
+        # Epochs
+        start_epoch = ckpt['epoch'] + 1
+        if opt.resume:
+            assert start_epoch > 0, '%s training to %g epochs is finished, nothing to resume.' % (weights, epochs)
+        if epochs < start_epoch:
+            logger.info('%s has been trained for %g epochs. Fine-tuning for %g additional epochs.' %
+                        (weights, ckpt['epoch'], epochs))
+            epochs += ckpt['epoch']  # finetune additional epochs
+
+        del ckpt, state_dict
 
     # Image sizes
     gs = max(int(model.stride.max()), 32)  # grid size (max stride)
@@ -394,7 +416,6 @@ def train(hyp, opt, device, tb_writer=None):
                                                  batch_size=batch_size * 2,
                                                  imgsz=imgsz_test,
                                                  model=ema.ema,
-                                                 dconfig=model.module.model[-1],
                                                  single_cls=opt.single_cls,
                                                  dataloader=testloader,
                                                  save_dir=save_dir,
@@ -505,12 +526,11 @@ def train(hyp, opt, device, tb_writer=None):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    # parser.add_argument('--weights', type=str, default='/root/workspace/projects/project_yolov7/yolov7_npmc/yolov7.pt', help='initial weights path')
-    parser.add_argument('--weights', type=str, default='', help='initial weights path')
-    parser.add_argument('--cfg', type=str, default='/root/workspace/projects/project_yolov7/yolov7_npmc/cfg/training/yolov7-voc.yaml', help='model.yaml path')
-    parser.add_argument('--data', type=str, default='/root/workspace/projects/project_yolov7/yolov7_npmc/data/voc.yaml', help='data.yaml path')
-    parser.add_argument('--hyp', type=str, default='/root/workspace/projects/project_yolov7/yolov7_npmc/data/hyp.scratch.p5-voc.yaml', help='hyperparameters path')
-    parser.add_argument('--epochs', type=int, default=50)
+    parser.add_argument('--weights', type=str, default='yolo7.pt', help='initial weights path')
+    parser.add_argument('--cfg', type=str, default='', help='model.yaml path')
+    parser.add_argument('--data', type=str, default='data/coco.yaml', help='data.yaml path')
+    parser.add_argument('--hyp', type=str, default='data/hyp.scratch.p5.yaml', help='hyperparameters path')
+    parser.add_argument('--epochs', type=int, default=300)
     parser.add_argument('--batch-size', type=int, default=16, help='total batch size for all GPUs')
     parser.add_argument('--img-size', nargs='+', type=int, default=[640, 640], help='[train, test] image sizes')
     parser.add_argument('--rect', action='store_true', help='rectangular training')
@@ -522,7 +542,7 @@ if __name__ == '__main__':
     parser.add_argument('--bucket', type=str, default='', help='gsutil bucket')
     parser.add_argument('--cache-images', action='store_true', help='cache images for faster training')
     parser.add_argument('--image-weights', action='store_true', help='use weighted image selection for training')
-    parser.add_argument('--device', default='4,5,6,7', help='cuda device, i.e. 0 or 0,1,2,3 or cpu')
+    parser.add_argument('--device', default='', help='cuda device, i.e. 0 or 0,1,2,3 or cpu')
     parser.add_argument('--multi-scale', action='store_true', help='vary img-size +/- 50%%')
     parser.add_argument('--single-cls', action='store_true', help='train multi-class data as single-class')
     parser.add_argument('--adam', action='store_true', help='use torch.optim.Adam() optimizer')
@@ -542,9 +562,6 @@ if __name__ == '__main__':
     parser.add_argument('--artifact_alias', type=str, default="latest", help='version of dataset artifact to be used')
     parser.add_argument('--freeze', nargs='+', type=int, default=[0], help='Freeze layers: backbone of yolov7=50, first3=0 1 2')
     parser.add_argument('--v5-metric', action='store_true', help='assume maximum recall as 1.0 in AP calculation')
-    
-    ## added for npmc
-    parser.add_argument('--graphmodule', type=str, default='/root/workspace/projects/project_yolov7/yolov7_voc_p06.pt', help='initial weights path')
     opt = parser.parse_args()
 
     # Set DDP variables
