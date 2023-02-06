@@ -16,7 +16,7 @@ from utils.general import coco80_to_coco91_class, check_dataset, check_file, che
 from utils.metrics import ap_per_class, ConfusionMatrix
 from utils.plots import plot_images, output_to_target, plot_study_txt
 from utils.torch_utils import select_device, time_synchronized, TracedModel
-
+from models.yolo import Model, DetectPostPart
 
 def test(data,
          weights=None,
@@ -41,7 +41,8 @@ def test(data,
          trace=False,
          is_coco=False,
          v5_metric=False,
-         dconfig=None):
+         dconfig=None,
+         detect_post_part=None):
     # Initialize/load model and set device
     training = model is not None
     if training:  # called by train.py
@@ -56,7 +57,21 @@ def test(data,
         (save_dir / 'labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
 
         # Load model
-        model = attempt_load(weights, map_location=device)  # load FP32 model
+        model = torch.load(opt.compressed_model_weights, map_location=device)
+        model_for_hyp = Model(opt.cfg, ch=3, nc=nc, anchors=hyp.get('anchors')).to(device)  # create
+        detector_for_hyp = model_for_hyp.model[-1]
+
+        stride, names = model_for_hyp.stride, model_for_hyp.names
+        na, nc, nl, anchors, anchor_grid, grid, no = detector_for_hyp.na, detector_for_hyp.nc, detector_for_hyp.nl,detector_for_hyp.anchors, \
+                                                    detector_for_hyp.anchor_grid, detector_for_hyp.grid, detector_for_hyp.no
+    
+        del model_for_hyp, detector_for_hyp
+        # update hyps    
+        model.stride = stride
+        model.names = names
+        # attach post part of Detect(IDetect)
+        detect_post_part = DetectPostPart(na,nc,nl,anchors,stride,anchor_grid,grid,no)
+        
         gs = max(int(model.stride.max()), 32)  # grid size (max stride)
         imgsz = check_img_size(imgsz, s=gs)  # check img_size
         
@@ -112,10 +127,7 @@ def test(data,
         with torch.no_grad():
             # Run model
             t = time_synchronized()
-            if training:
-                out, train_out = dconfig(model(img))
-            else:
-                out, train_out = model(img, augment=augment)  # inference and training outputs
+            out, train_out = detect_post_part(model(img))
             t0 += time_synchronized() - t
 
             # Compute loss
@@ -313,6 +325,8 @@ if __name__ == '__main__':
     parser.add_argument('--exist-ok', action='store_true', help='existing project/name ok, do not increment')
     parser.add_argument('--no-trace', action='store_true', help='don`t trace model')
     parser.add_argument('--v5-metric', action='store_true', help='assume maximum recall as 1.0 in AP calculation')
+    parser.add_argument('--compressed-model-weights',type=str)
+    parser.add_argument('--cfg',type=str)
     opt = parser.parse_args()
     opt.save_json |= opt.data.endswith('coco.yaml')
     opt.data = check_file(opt.data)  # check file
