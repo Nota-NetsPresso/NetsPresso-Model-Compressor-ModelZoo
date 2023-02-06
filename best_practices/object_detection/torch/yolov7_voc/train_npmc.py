@@ -123,12 +123,6 @@ def train(hyp, opt, device, tb_writer=None):
         if hasattr(v, 'im'):
             if hasattr(v.im, 'implicit'):           
                 pg0.append(v.im.implicit)
-            elif opt.graphmodule:
-                for vk,vm in v.im._modules.items():
-                    if hasattr(vm, 'implicit_'):
-                        pg0.append(getattr(vm,'implicit_'))
-                    elif hasattr(vm, 'implicit'):
-                        pg0.append(getattr(vm,'implicit'))
             else:
                 for iv in v.im:
                     pg0.append(iv.implicit)
@@ -153,12 +147,6 @@ def train(hyp, opt, device, tb_writer=None):
         if hasattr(v, 'ia'):
             if hasattr(v.ia, 'implicit'):           
                 pg0.append(v.ia.implicit)
-            elif opt.graphmodule:
-                for vk,va in v.ia._modules.items():
-                    if hasattr(va,'implicit_'):
-                        pg0.append(getattr(va,'implicit_'))
-                    elif hasattr(va,'implicit'):
-                        pg0.append(getattr(va,'implicit'))   
             else:
                 for iv in v.ia:
                     pg0.append(iv.implicit)
