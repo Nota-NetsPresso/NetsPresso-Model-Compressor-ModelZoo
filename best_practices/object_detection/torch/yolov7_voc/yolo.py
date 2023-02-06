@@ -6,6 +6,7 @@ from copy import deepcopy
 sys.path.append('./')  # to run '$ python *.py' files in subdirectories
 logger = logging.getLogger(__name__)
 import torch
+import torch.nn as nn
 from models.common import *
 from models.experimental import *
 from utils.autoanchor import check_anchor_order
