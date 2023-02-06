@@ -41,7 +41,6 @@ def test(data,
          trace=False,
          is_coco=False,
          v5_metric=False,
-         dconfig=None,
          detect_post_part=None):
     # Initialize/load model and set device
     training = model is not None
