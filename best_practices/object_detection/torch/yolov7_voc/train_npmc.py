@@ -123,6 +123,12 @@ def train(hyp, opt, device, tb_writer=None):
         if hasattr(v, 'im'):
             if hasattr(v.im, 'implicit'):           
                 pg0.append(v.im.implicit)
+            elif opt.compressed_model_weights:
+                for vk,vm in v.im._modules.items():
+                    if hasattr(vm, 'implicit_'):
+                        pg0.append(getattr(vm,'implicit_'))
+                    elif hasattr(vm, 'implicit'):
+                        pg0.append(getattr(vm,'implicit'))
             else:
                 for iv in v.im:
                     pg0.append(iv.implicit)
@@ -147,6 +153,12 @@ def train(hyp, opt, device, tb_writer=None):
         if hasattr(v, 'ia'):
             if hasattr(v.ia, 'implicit'):           
                 pg0.append(v.ia.implicit)
+            elif opt.compressed_model_weights:
+                for vk,va in v.ia._modules.items():
+                    if hasattr(va,'implicit_'):
+                        pg0.append(getattr(va,'implicit_'))
+                    elif hasattr(va,'implicit'):
+                        pg0.append(getattr(va,'implicit'))   
             else:
                 for iv in v.ia:
                     pg0.append(iv.implicit)
@@ -562,6 +574,7 @@ if __name__ == '__main__':
     parser.add_argument('--artifact_alias', type=str, default="latest", help='version of dataset artifact to be used')
     parser.add_argument('--freeze', nargs='+', type=int, default=[0], help='Freeze layers: backbone of yolov7=50, first3=0 1 2')
     parser.add_argument('--v5-metric', action='store_true', help='assume maximum recall as 1.0 in AP calculation')
+    parser.add_argument('--compressed-model-weights', type=str)
     opt = parser.parse_args()
 
     # Set DDP variables
