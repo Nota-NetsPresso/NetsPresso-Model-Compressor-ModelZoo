@@ -19,6 +19,7 @@ try:
 except ImportError:
     thop = None
 
+import torch.nn as nn
 
 class Detect(nn.Module):
     stride = None  # strides computed during build
@@ -732,6 +733,61 @@ class Model(nn.Module):
     def info(self, verbose=False, img_size=640):  # print model information
         model_info(self, verbose, img_size)
 
+
+
+class ModelForNPMC(Model):
+    def __init__(self, cfg='yolor-csp-c.yaml', ch=3, nc=None, anchors=None):  # model, input channels, number of classes
+        super(ModelForNPMC, self).__init__(cfg, ch, nc, anchors)
+    def forward(self, x, augment=False, profile=False):
+            return self.forward_once(x, profile)  # single-scale inference, train
+
+    def forward_once(self, x, profile=False):
+        y, dt = [], []  # outputs
+        for m in self.model:
+            if m.f != -1:  # if not from previous layer
+                x = y[m.f] if isinstance(m.f, int) else [x if j == -1 else y[j] for j in m.f]  # from earlier layers
+
+            if not hasattr(self, 'traced'):
+                self.traced=False
+
+            if self.traced:
+                if isinstance(m, Detect) or isinstance(m, IDetect) or isinstance(m, IAuxDetect) or isinstance(m, IKeypoint):
+                    break
+            x = m(x)  # run
+
+            y.append(x if m.i in self.save else None)  # save output
+        return x
+
+class DetectPostPart(nn.Module):
+    def __init__(self,na,nc,nl,anchors,stride,anchor_grid, grid, no):
+        super(DetectPostPart, self).__init__()
+        self.na = na
+        self.nc = nc
+        self.nl = nl
+        self.anchors = anchors
+        self.stride = stride
+        self.anchor_grid = anchor_grid
+        self.grid = grid
+        self.no = no
+    @staticmethod
+    def _make_grid(nx=20, ny=20):
+        yv, xv = torch.meshgrid([torch.arange(ny), torch.arange(nx)])
+        return torch.stack((xv, yv), 2).view((1, 1, ny, nx, 2)).float()
+    
+    def forward(self, x):
+        z = []
+        for i in range(self.nl):
+            bs, _, ny, nx, _  = x[i].shape
+            # print(x[i].shape)
+            if self.grid[i].shape[2:4] != x[i].shape[2:4]:
+                self.grid[i] = self._make_grid(nx, ny).to(x[i].device)
+            y = x[i].sigmoid()
+            y[..., 0:2] = (y[..., 0:2] * 2. - 0.5 + self.grid[i]) * self.stride[i]  # xy
+            y[..., 2:4] = (y[..., 2:4] * 2) ** 2 * self.anchor_grid[i]  # wh
+
+            z.append(y.view(bs, -1, self.no))      
+        
+        return (torch.cat(z,1), x)
 
 def parse_model(d, ch):  # model_dict, input_channels(3)
     logger.info('\n%3s%18s%3s%10s  %-40s%-30s' % ('', 'from', 'n', 'params', 'module', 'arguments'))
