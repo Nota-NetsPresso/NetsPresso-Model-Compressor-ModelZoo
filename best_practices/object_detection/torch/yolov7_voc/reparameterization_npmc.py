@@ -8,12 +8,16 @@ import torch.fx as fx
 
 def find_node(model, name):
     for idx, node in enumerate(list(model.graph.nodes)):
-        if node.name == name:
+        if node.name.replace('module_dict_','') == name:
             return node
     return None
 
 # Fusing BatchNorm with Convolutional layer
 def fuse_conv_bn_eval(conv, bn):
+    """
+    합성곱 모듈 'A'와 배치 정규화 모듈 'B'가 주어지면
+    C(x) == B(A(x))를 만족하는 합성곱 모듈 'C'를 추론 모드로 반환합니다.
+    """
     assert(not (conv.training or bn.training)), "Fusion only for eval!"
     fused_conv = copy.deepcopy(conv)
 
@@ -114,6 +118,11 @@ def rep_im(model, head, target, tail_1, tail_2, im_a_weight, im_m_weight):
         modules[target.target].bias *= im_m_weight.reshape(c2)
         modules[target.target].weight *= im_m_weight.transpose(0,1)
 
+def get_module_dict(model):
+    while hasattr(model, 'module_dict'):
+        model = model.module_dict
+    return model
+
 def fusing_yolov7(model):
     model = model.float().eval()
     # fusing conv-bn
@@ -123,49 +132,51 @@ def fusing_yolov7(model):
 
     print("Reparameterizing")
     # head_0
-    head = find_node(fused_model,'module_dict_module_dict_module_dict_model_75_act')
-    conv1x1 = find_node(fused_model,'module_dict_module_dict_module_dict_model_102_rbr_1x1_0')
-    conv3x3 = find_node(fused_model,'module_dict_module_dict_module_dict_model_102_rbr_dense_0')
-    tail = find_node(fused_model,'module_dict_module_dict_module_dict_model_102_act')
+    head = find_node(fused_model,'model_75_act')
+    conv1x1 = find_node(fused_model,'model_102_rbr_1x1_0')
+    conv3x3 = find_node(fused_model,'model_102_rbr_dense_0')
+    tail = find_node(fused_model,'model_102_act')
     rep_conv1x1(fused_model,head,conv1x1,conv3x3,tail)
 
-    head = find_node(fused_model,'module_dict_module_dict_module_dict_model_102_act')
-    target = find_node(fused_model,'module_dict_module_dict_module_dict_model_105_m_0')
+    head = find_node(fused_model,'model_102_act')
+    target = find_node(fused_model,'model_105_m_0')
     tail_1 =  find_node(fused_model,'getattr_1')
     tail_2 = find_node(fused_model,'view')
-    im_a_weight = getattr(getattr(fused_model.module_dict.module_dict.module_dict.model, "105").ia, "0")._parameters['NOTA_implicit']
-    im_m_weight = getattr(getattr(fused_model.module_dict.module_dict.module_dict.model, "105").im, "0")._parameters['NOTA_implicit']
+    
+    module_dict = get_module_dict(fused_model)
+    im_a_weight = module_dict.model._modules['105']._modules['ia']._modules['0']._parameters['NOTA_implicit']
+    im_m_weight = module_dict.model._modules['105']._modules['im']._modules['0']._parameters['NOTA_implicit']
     rep_im(fused_model,head,target,tail_1,tail_2,im_a_weight,im_m_weight)
 
     # head_1
-    head = find_node(fused_model,'module_dict_module_dict_module_dict_model_88_act')
-    conv1x1 = find_node(fused_model,'module_dict_module_dict_module_dict_model_103_rbr_1x1_0')
-    conv3x3 = find_node(fused_model,'module_dict_module_dict_module_dict_model_103_rbr_dense_0')
-    tail = find_node(fused_model,'module_dict_module_dict_module_dict_model_103_act')
+    head = find_node(fused_model,'model_88_act')
+    conv1x1 = find_node(fused_model,'model_103_rbr_1x1_0')
+    conv3x3 = find_node(fused_model,'model_103_rbr_dense_0')
+    tail = find_node(fused_model,'model_103_act')
     rep_conv1x1(fused_model,head,conv1x1,conv3x3,tail)
     
-    head = find_node(fused_model,'module_dict_module_dict_module_dict_model_103_act')
-    target = find_node(fused_model,'module_dict_module_dict_module_dict_model_105_m_1')
+    head = find_node(fused_model,'model_103_act')
+    target = find_node(fused_model,'model_105_m_1')
     tail_1 =  find_node(fused_model,'getattr_2')
     tail_2 = find_node(fused_model,'view_1')
-    im_a_weight = getattr(getattr(fused_model.module_dict.module_dict.module_dict.model, "105").ia, "1")._parameters['NOTA_implicit']
-    im_m_weight = getattr(getattr(fused_model.module_dict.module_dict.module_dict.model, "105").im, "1")._parameters['NOTA_implicit']
+    im_a_weight = module_dict.model._modules['105']._modules['ia']._modules['1']._parameters['NOTA_implicit']
+    im_m_weight = module_dict.model._modules['105']._modules['im']._modules['1']._parameters['NOTA_implicit']
     rep_im(fused_model,head,target,tail_1,tail_2,im_a_weight,im_m_weight)
 
 
     # head_2
-    head = find_node(fused_model,'module_dict_module_dict_module_dict_model_101_act')
-    conv1x1 = find_node(fused_model,'module_dict_module_dict_module_dict_model_104_rbr_1x1_0')
-    conv3x3 = find_node(fused_model,'module_dict_module_dict_module_dict_model_104_rbr_dense_0')
-    tail = find_node(fused_model,'module_dict_module_dict_module_dict_model_104_act')
+    head = find_node(fused_model,'model_101_act')
+    conv1x1 = find_node(fused_model,'model_104_rbr_1x1_0')
+    conv3x3 = find_node(fused_model,'model_104_rbr_dense_0')
+    tail = find_node(fused_model,'model_104_act')
     rep_conv1x1(fused_model,head,conv1x1,conv3x3,tail)
 
-    head = find_node(fused_model,'module_dict_module_dict_module_dict_model_104_act')
-    target = find_node(fused_model,'module_dict_module_dict_module_dict_model_105_m_2')
+    head = find_node(fused_model,'model_104_act')
+    target = find_node(fused_model,'model_105_m_2')
     tail_1 =  find_node(fused_model,'getattr_3')
     tail_2 = find_node(fused_model,'view_2')
-    im_a_weight = getattr(getattr(fused_model.module_dict.module_dict.module_dict.model, "105").ia, "2")._parameters['NOTA_implicit']
-    im_m_weight = getattr(getattr(fused_model.module_dict.module_dict.module_dict.model, "105").im, "2")._parameters['NOTA_implicit']
+    im_a_weight = module_dict.model._modules['105']._modules['ia']._modules['2']._parameters['NOTA_implicit']
+    im_m_weight = module_dict.model._modules['105']._modules['im']._modules['2']._parameters['NOTA_implicit']
     rep_im(fused_model,head,target,tail_1,tail_2,im_a_weight,im_m_weight)
 
     print("Reparameterizing - Success")
@@ -178,11 +189,12 @@ def fusing_yolov7(model):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model', type=str, default='/root/workspace/projects/YOLOv7BestPractice/bestPractice3/yolov7/runs/train/finetuned_yolov7_voc_compressed_model_L2Norm_02/weights/best.pt', help='finetuned-yolov7 graphmodule path')
-    parser.add_argument('--save_model_path', type=str, default='yolo7-voc-finetuned.pt', help='finetuned-yolov7 graphmodule path')
+    parser.add_argument('--model', type=str, default='/root/workspace/projects/YOLOv7BestPractice/bestPractice3/yolov7/yolov7_voc_compressed_model_L2Norm_02.pt', help='finetuned-yolov7 graphmodule path')
+    parser.add_argument('--save_model_path', type=str, default='yolo7-voc-finetuned_rep.pt', help='finetuned-yolov7 graphmodule path')
     args = parser.parse_args()
     
-    model = torch.load(args.model,map_location='cpu')['model'].float().train()
+    # model = torch.load(args.model,map_location='cpu')['model'].float().train()
+    model = torch.load(args.model,map_location='cpu')
     fused_model = fusing_yolov7(model)
     
     torch.save(fused_model,args.save_model_path)
