@@ -189,8 +189,12 @@ if __name__ == '__main__':
     parser.add_argument('--save_model_path', type=str, default='yolo7-voc-finetuned_rep.pt', help='finetuned-yolov7 graphmodule path')
     args = parser.parse_args()
     
-    # model = torch.load(args.model,map_location='cpu')['model'].float().train()
-    model = torch.load(args.model,map_location='cpu')
+    ckpt = torch.load(args.model, location='cpu')
+    if type(ckpt) == dict:
+        model = ckpt['model']
+    else:
+        model = ckpt
+    model.float().train()
     fused_model = fusing_yolov7(model)
     
     torch.save(fused_model,args.save_model_path)

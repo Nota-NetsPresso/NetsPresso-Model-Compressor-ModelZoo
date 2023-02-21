@@ -95,7 +95,7 @@ def train(hyp, opt, device, tb_writer=None):
     model.names = names
     # attach post part of Detect(IDetect)
     detect_post_part = DetectPostPart(na,nc,nl,anchors,stride,anchor_grid,grid,no)
-    
+    model.model = nn.Sequential(detect_post_part)
     
     with torch_distributed_zero_first(rank):
         check_dataset(data_dict)  # check
