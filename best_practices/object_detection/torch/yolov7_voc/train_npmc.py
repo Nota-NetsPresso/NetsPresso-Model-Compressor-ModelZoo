@@ -21,9 +21,9 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
-import test_npmc as test  # import test.py to get mAP after each epoch
+import test  # import test.py to get mAP after each epoch
 from models.experimental import attempt_load
-from models.yolo import Model, DetectPostPart
+from models.yolo import Model
 from utils.autoanchor import check_anchors
 from utils.datasets import create_dataloader
 from utils.general import labels_to_class_weights, increment_path, labels_to_image_weights, init_seeds, \
@@ -80,23 +80,19 @@ def train(hyp, opt, device, tb_writer=None):
     assert len(names) == nc, '%g names found for nc=%g dataset in %s' % (len(names), nc, opt.data)  # check
 
     # Model
-    # load models
-    model = torch.load(opt.graphmodule_model, map_location=device)
-    model_for_hyp = Model(opt.cfg, ch=3, nc=nc, anchors=hyp.get('anchors')).to(device)  # create
-    detector_for_hyp = model_for_hyp.model[-1]
-
-    stride, names = model_for_hyp.stride, model_for_hyp.names
-    na, nc, nl, anchors, anchor_grid, grid, no = detector_for_hyp.na, detector_for_hyp.nc, detector_for_hyp.nl,detector_for_hyp.anchors, \
-                                                 detector_for_hyp.anchor_grid, detector_for_hyp.grid, detector_for_hyp.no
-    
-    del model_for_hyp, detector_for_hyp
-    # update hyps    
-    model.stride = stride
-    model.names = names
-    # attach post part of Detect(IDetect)
-    detect_post_part = DetectPostPart(na,nc,nl,anchors,stride,anchor_grid,grid,no)
-    model.model = nn.Sequential(detect_post_part)
-    
+    pretrained = weights.endswith('.pt')
+    if pretrained:
+        with torch_distributed_zero_first(rank):
+            attempt_download(weights)  # download if not found locally
+        ckpt = torch.load(weights, map_location=device)  # load checkpoint
+        model = Model(opt.cfg or ckpt['model'].yaml, ch=3, nc=nc, anchors=hyp.get('anchors')).to(device)  # create
+        exclude = ['anchor'] if (opt.cfg or hyp.get('anchors')) and not opt.resume else []  # exclude keys
+        state_dict = ckpt['model'].float().state_dict()  # to FP32
+        state_dict = intersect_dicts(state_dict, model.state_dict(), exclude=exclude)  # intersect
+        model.load_state_dict(state_dict, strict=False)  # load
+        logger.info('Transferred %g/%g items from %s' % (len(state_dict), len(model.state_dict()), weights))  # report
+    else:
+        model = Model(opt.cfg, ch=3, nc=nc, anchors=hyp.get('anchors')).to(device)  # create
     with torch_distributed_zero_first(rank):
         check_dataset(data_dict)  # check
     train_path = data_dict['train']
@@ -127,12 +123,6 @@ def train(hyp, opt, device, tb_writer=None):
         if hasattr(v, 'im'):
             if hasattr(v.im, 'implicit'):           
                 pg0.append(v.im.implicit)
-            elif opt.graphmodule_model:
-                for vk,vm in v.im._modules.items():
-                    if hasattr(vm, 'implicit_'):
-                        pg0.append(getattr(vm,'implicit_'))
-                    elif hasattr(vm, 'implicit'):
-                        pg0.append(getattr(vm,'implicit'))
             else:
                 for iv in v.im:
                     pg0.append(iv.implicit)
@@ -157,12 +147,6 @@ def train(hyp, opt, device, tb_writer=None):
         if hasattr(v, 'ia'):
             if hasattr(v.ia, 'implicit'):           
                 pg0.append(v.ia.implicit)
-            elif opt.graphmodule_model:
-                for vk,va in v.ia._modules.items():
-                    if hasattr(va,'implicit_'):
-                        pg0.append(getattr(va,'implicit_'))
-                    elif hasattr(va,'implicit'):
-                        pg0.append(getattr(va,'implicit'))   
             else:
                 for iv in v.ia:
                     pg0.append(iv.implicit)
@@ -217,6 +201,31 @@ def train(hyp, opt, device, tb_writer=None):
 
     # Resume
     start_epoch, best_fitness = 0, 0.0
+    if pretrained:
+        # Optimizer
+        if ckpt['optimizer'] is not None:
+            optimizer.load_state_dict(ckpt['optimizer'])
+            best_fitness = ckpt['best_fitness']
+
+        # EMA
+        if ema and ckpt.get('ema'):
+            ema.ema.load_state_dict(ckpt['ema'].float().state_dict())
+            ema.updates = ckpt['updates']
+
+        # Results
+        if ckpt.get('training_results') is not None:
+            results_file.write_text(ckpt['training_results'])  # write results.txt
+
+        # Epochs
+        start_epoch = ckpt['epoch'] + 1
+        if opt.resume:
+            assert start_epoch > 0, '%s training to %g epochs is finished, nothing to resume.' % (weights, epochs)
+        if epochs < start_epoch:
+            logger.info('%s has been trained for %g epochs. Fine-tuning for %g additional epochs.' %
+                        (weights, ckpt['epoch'], epochs))
+            epochs += ckpt['epoch']  # finetune additional epochs
+
+        del ckpt, state_dict
 
     # Image sizes
     gs = max(int(model.stride.max()), 32)  # grid size (max stride)
@@ -415,8 +424,7 @@ def train(hyp, opt, device, tb_writer=None):
                                                  wandb_logger=wandb_logger,
                                                  compute_loss=compute_loss,
                                                  is_coco=is_coco,
-                                                 v5_metric=opt.v5_metric,
-                                                 detect_post_part=detect_post_part)
+                                                 v5_metric=opt.v5_metric)
 
             # Write
             with open(results_file, 'a') as f:
@@ -518,9 +526,9 @@ def train(hyp, opt, device, tb_writer=None):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', type=str, default='', help='initial weights path')
-    parser.add_argument('--cfg', type=str, default='cfg/training/yolov7-voc.yaml', help='model.yaml path')
-    parser.add_argument('--data', type=str, default='data/voc.yaml', help='data.yaml path')
+    parser.add_argument('--weights', type=str, default='yolo7.pt', help='initial weights path')
+    parser.add_argument('--cfg', type=str, default='', help='model.yaml path')
+    parser.add_argument('--data', type=str, default='data/coco.yaml', help='data.yaml path')
     parser.add_argument('--hyp', type=str, default='data/hyp.scratch.p5.yaml', help='hyperparameters path')
     parser.add_argument('--epochs', type=int, default=300)
     parser.add_argument('--batch-size', type=int, default=16, help='total batch size for all GPUs')
@@ -554,7 +562,6 @@ if __name__ == '__main__':
     parser.add_argument('--artifact_alias', type=str, default="latest", help='version of dataset artifact to be used')
     parser.add_argument('--freeze', nargs='+', type=int, default=[0], help='Freeze layers: backbone of yolov7=50, first3=0 1 2')
     parser.add_argument('--v5-metric', action='store_true', help='assume maximum recall as 1.0 in AP calculation')
-    parser.add_argument('--graphmodule-model', type=str, help='compressed model path (graphmodule)')
     opt = parser.parse_args()
 
     # Set DDP variables
