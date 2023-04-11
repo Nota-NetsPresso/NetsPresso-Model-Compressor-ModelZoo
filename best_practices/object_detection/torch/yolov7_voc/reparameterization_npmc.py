@@ -189,7 +189,7 @@ if __name__ == '__main__':
     parser.add_argument('--save_model_path', type=str, default='yolo7-voc-finetuned_rep.pt', help='finetuned-yolov7 graphmodule path')
     args = parser.parse_args()
     
-    ckpt = torch.load(args.model, location='cpu')
+    ckpt = torch.load(args.model, map_location='cpu')
     if type(ckpt) == dict:
         model = ckpt['model']
     else:
