@@ -71,6 +71,7 @@ Options: FP32, TFlite
 |[YOLOv7](https://github.com/WongKinYiu/yolov7)|Original|PASCAL VOC|89.6|71.3|104739.64|37.27|5464.59|146.33||
 |YOLOv7|Compressed-1|PASCAL VOC|88.4 (-1.2)|69.6 (-1.7)|77859.81 (1.35x)|17.12 (2.18x)|3855.95 (1.42x)|67.45 (2.00x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/object_detection/torch/yolov7_voc/YOLOv7.ipynb)|
 |YOLOv7|Compressed-2|PASCAL VOC|85.2 (-4.4)|63.6 (-7.7)|21878.87 (4.79x)|2.55 (14.60x)|2041.65 (2.68x)|10.61 (13.79x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/object_detection/torch/yolov7_voc/YOLOv7.ipynb)|
+
 The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).  
 Options: FP32, ONNX runtime
 
