@@ -68,7 +68,9 @@ Options: FP32, TFlite
 |[YOLOX](https://github.com/Megvii-BaseDetection/YOLOX)|Original|COCO|68.0|49.7|156006.20|54.21|12239.46|207.37||
 |YOLOX|Compressed-1|COCO|67.16 (-0.84)|48.64 (-1.06)|101804.06 (1.53x)|19.96 (2.7x)|8502.72 (1.44x)|76.61 (2.7x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/object_detection/torch/yolox_coco/YOLOX.ipynb)|
 |YOLOX|Compressed-2|COCO|61.43 (-6.57)|43.47 (-5.47)|38607.03 (4.04x)|4.93 (11.0x)|4235.37 (2.89x)|19.17 (10.80x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/object_detection/torch/yolox_coco/YOLOX.ipynb)|
-
+|[YOLOv7](https://github.com/WongKinYiu/yolov7)|Original|PASCAL VOC|89.6|71.3|104739.64|37.27|5464.59|146.33||
+|YOLOv7|Compressed-1|PASCAL VOC|88.4 (-1.2)|69.6 (-1.7)|77859.81 (1.35x)|17.12 (2.18x)|3855.95 (1.42x)|67.45 (2.00x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/object_detection/torch/yolov7_voc/YOLOv7.ipynb)|
+|YOLOv7|Compressed-2|PASCAL VOC|85.2 (-4.4)|63.6 (-7.7)|21878.87 (4.79x)|2.55 (14.60x)|2041.65 (2.68x)|10.61 (13.79x)|[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo/blob/main/best_practices/object_detection/torch/yolov7_voc/YOLOv7.ipynb)|
 The model's latency is measured using a Raspberry Pi 4B (1.5GHz ARM Cortex).  
 Options: FP32, ONNX runtime
 

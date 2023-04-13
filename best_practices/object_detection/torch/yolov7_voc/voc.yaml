@@ -1,0 +1,13 @@
+# train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
+train: ['./VOCdevkit/images/train2012/', './VOCdevkit/images/train2007/', './VOCdevkit/images/val2012/', './VOCdevkit/images/train2007/'] # 16542 (voc) # 118287 images (coco)
+# train: ./VOC/images/
+val: ./VOCdevkit/images/test2007/  # 4794 (voc) # 5000 images (coco) 
+test: ./VOCdevkit/images/test2007/  # 20288 of 40670 images, submit to https://competitions.codalab.org/competitions/20794
+
+# number of classes
+nc: 20
+
+# class names
+names: [ 'aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus', 'car', 'cat', 'chair', 'cow',
+         'diningtable', 'dog', 'horse', 'motorbike', 'person', 'pottedplant', 'sheep', 'sofa',
+         'train', 'tvmonitor']
