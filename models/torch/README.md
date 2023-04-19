@@ -91,10 +91,9 @@ model = torch.load("resnet18.pt")
 
 ### **Case 1 : torchvision**
 
-* ### To call onnx.export
-  * Model (Required)
-  * Input value (Required)
-  * Output value (Optional)
+* ### To call onnx.export (Required)
+  * Model
+  * Input value
 
 
 
@@ -107,7 +106,7 @@ from torch.onnx import TrainingMode
 input_tensor = torch.rand(torch.Size([1, 3, 224, 224]))
 model = resnet18(pretrained=True)
 dummy_output = model(input_tensor)
-torch.onnx.export(model, input_tensor, "resnet18.onnx", verbose=True, example_outputs=dummy_output, training=TrainingMode.TRAINING)
+torch.onnx.export(model, input_tensor, "resnet18.onnx", verbose=True, training=TrainingMode.TRAINING)
 ```
 
 
@@ -147,7 +146,7 @@ class Net(nn.Module):
 simple_model= Net()
 input_tensor = torch.rand(torch.Size([1, 3, 224, 224]))
 dummy_output = simple_model(input_tensor)
-torch.onnx.export(simple_model, input_tensor, "simple_model.onnx", verbose=True, example_outputs=dummy_output, training=TrainingMode.TRAINING)
+torch.onnx.export(simple_model, input_tensor, "simple_model.onnx", verbose=True, training=TrainingMode.TRAINING)
 ```
 
 
