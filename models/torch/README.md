@@ -1,7 +1,7 @@
-# Model Zoo for the NetsPresso Compression Toolkit
+# Model Zoo for the NetsPresso Model Compressor
 ## Provided Model Descriptions
 * ### ImageNet Pretrained Models - /models/torch/torchvision [(link)](https://pytorch.org/vision/0.8/models.html#classification)
-  * Following models are now available on [NetsPresso Compression Toolkit](https://compression.netspresso.ai/).
+  * Following models are now available on [NetsPresso Model Compressor](https://compression.netspresso.ai/).
     |       Model       |  FD | Pruning |   ONNX & torch Version    |
     |:-----------------:|:---:|:-------:|:-------------:|
     |      Alexnet      | Yes |   Yes   | 1.10.x        |
@@ -19,7 +19,7 @@
     |    RegNet_y_400mf    | Yes |   Yes   | 1.10.x        |
     | RegNet_x_400mf | Yes |   Yes   | 1.10.x        |
 * ### Subset of COCO Pretrained models - /models/torch/torchvision [(link)](https://pytorch.org/vision/0.8/models.html#semantic-segmentation)
-  * Following models are now available on [NetsPresso Compression Toolkit](https://compression.netspresso.ai/).
+  * Following models are now available on [NetsPresso Model Compressor](https://compression.netspresso.ai/).
     |       Model       |  FD | Pruning |   ONNX & torch Version    |
     |:-----------------:|:---:|:-------:|:-------------:|
     | FCN_ResNet101 | Yes | Yes | 1.10.x        |
