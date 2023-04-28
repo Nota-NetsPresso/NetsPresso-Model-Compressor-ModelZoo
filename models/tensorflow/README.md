@@ -1,14 +1,14 @@
-# Model Zoo for the NetsPresso Compression Toolkit
+# Model Zoo for the NetsPresso Model Compressor
 
 <div align=right>
   <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FNota-NetsPresso%2FNetsPresso-CompressionToolkit-ModelZoo%2Fblob%2Fmain%2FREADME.md&count_bg=%23368EEB&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
 </div>
 
-## Detail Workflow of the NetsPresso Compression Toolkit
+## Detail Workflow of the NetsPresso Model Compressor
 
 ### Step 1. Preparing the Pre-trained Model
   ```shell
-  $ git clone https://github.com/Nota-NetsPresso/NetsPresso-CompressionToolkit-ModelZoo.git
+  $ git clone https://github.com/Nota-NetsPresso/NetsPresso-Model-Compressor-ModelZoo.git
   $ pip install -r requirements.txt
   ```
 
@@ -17,7 +17,7 @@
     <img src="/imgs/web_user_1.png" alt="web_user">
   </a>
 
-### Step 2. Compress the Model by Using [NetsPresso Compression Toolkit](https://compression.netspresso.ai/)
+### Step 2. Compress the Model by Using [NetsPresso Model Compressor](https://compression.netspresso.ai/)
 
   * For more detail please refer to the [NetsPresso Documentation](https://docs.netspresso.ai/docs).
 
@@ -67,7 +67,7 @@
 We provide the compressed results of following models in the [Best Practices](https://github.com/Nota-NetsPresso/NetsPresso-Model-Compressor-ModelZoo/tree/main/best_practices#tf-keras).
 
 * ### ImageNet Pretrained Models - /models/tensorflow/keras-applications
-  * Following models are now available on [NetsPresso Compression Toolkit](https://compression.netspresso.ai/).
+  * Following models are now available on [NetsPresso Model Compressor](https://compression.netspresso.ai/).
     |       Model       |  FD | Pruning |    Version    |
     |:-----------------:|:---:|:-------:|:-------------:|
     |       VGG16       | Yes |   Yes   | 2.2.x - 2.5.x |

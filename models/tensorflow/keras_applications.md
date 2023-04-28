@@ -10,7 +10,7 @@ We provide a collection of saved models from tf.keras.applications ([r2.2](https
 
 ## Supported TF Versions
 * ### ImageNet Pretrained Models - /models/keras-applications
-  * Following models are now available on [NetsPresso Compression Toolkit](https://compression.netspresso.ai/).
+  * Following models are now available on [NetsPresso Model Compressor](https://compression.netspresso.ai/).
     |       Model       |  FD | Pruning |    Version    |
     |:-----------------:|:---:|:-------:|:-------------:|
     |       VGG16       | Yes |   Yes   | 2.2.x - 2.5.x |
