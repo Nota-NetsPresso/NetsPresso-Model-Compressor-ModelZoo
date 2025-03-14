@@ -1,3 +1,5 @@
+# [Last updated] Aug 29, 2023
+
 # Model Zoo for the NetsPresso Model Compressor
 
 <div align=right>
