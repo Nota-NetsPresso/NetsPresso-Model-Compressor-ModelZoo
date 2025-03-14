@@ -14,7 +14,7 @@
 
 ## Purpose of the Model Zoo
 
-* Providing the model zoo to help the beginner to try the [NetsPresso Model Compressor](https://compression.netspresso.ai/).
+* Providing the model zoo to help the beginner to try the NetsPresso Model Compressor.
 * Verifying the NetsPresso Model Compressor.
   * Training file, Original model, and its compressed model are provided.
 
